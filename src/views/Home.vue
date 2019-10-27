@@ -8,8 +8,8 @@
 
 <script>
 import Hero from "@/components/partials/Hero";
-import TopNavigation from "@/components/sturucture/TopNavigation";
-import FooterComponent from "@/components/sturucture/Footer";
+import TopNavigation from "@/components/structure/TopNavigation";
+import FooterComponent from "@/components/structure/Footer";
 
 export default {
   name: "Home",
