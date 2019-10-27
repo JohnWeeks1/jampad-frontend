@@ -1,13 +1,13 @@
 <template>
   <div>
     <top-navigation></top-navigation>
-    <hero></hero>
+    <content-section></content-section>
     <footer-component></footer-component>
   </div>
 </template>
 
 <script>
-import Hero from "@/components/partials/Hero";
+import ContentSection from "@/components/partials/ContentSection";
 import TopNavigation from "@/components/sturucture/TopNavigation";
 import FooterComponent from "@/components/sturucture/Footer";
 
@@ -16,7 +16,7 @@ export default {
   components: {
     TopNavigation,
     FooterComponent,
-    Hero
+    ContentSection
   }
 };
 </script>
