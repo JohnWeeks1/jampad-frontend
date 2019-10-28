@@ -1,7 +1,7 @@
 <template>
     <div>
         <top-navigation></top-navigation>
-        {{this.$store.state.email}}
+        {{this.$store.state.user}}
         <div class="min-h-screen w-full p-6 bg-gray-300 flex justify-center items-center">
             <div class="w-full max-w-xs">
                 <div class="bg-white border p-8 shadow rounded w-full mb-6">
@@ -101,8 +101,8 @@
                         password: this.password
                     })
                     .then(response => {
-                        this.$store.commit('loginSuccess', response.data.access_token);
-                        let t = this.$store.state.token;
+                        this.$store.commit('user/loginSuccess', response.data.access_token);
+                        let t = this.$store.state.user.token;
                         if (t) {
                             this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + t;
                         }
@@ -129,9 +129,10 @@
                 this.$http
                     .get("http://jampad.test/api/auth/user")
                     .then(response => {
-                        this.$store.commit('updateFirstName', response.data.first_name);
-                        this.$store.commit('updateLastName', response.data.last_name);
-                        this.$store.commit('updateEmail', response.data.email);
+                        this.$store.commit('user/updateFirstName', response.data.first_name);
+                        this.$store.commit('user/updateLastName', response.data.last_name);
+                        this.$store.commit('user/updateEmail', response.data.email);
+                        this.$store.commit('user/updateUserId', response.data.id);
                         console.log(response);
                     })
                     .catch(error => {
