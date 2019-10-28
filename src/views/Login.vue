@@ -2,6 +2,7 @@
     <div>
         <top-navigation></top-navigation>
         {{this.$store.state.user}}
+        {{firsName}}
         <div class="min-h-screen w-full p-6 bg-gray-300 flex justify-center items-center">
             <div class="w-full max-w-xs">
                 <div class="bg-white border p-8 shadow rounded w-full mb-6">
@@ -91,23 +92,29 @@
             return {
                 email: null,
                 password: null
-            };
+            }
+        },
+        computed: {
+            firsName() {
+                return this.$store.getters['user/getFirstName'];
+            },
         },
         methods: {
             login() {
                 this.$http
-                    .post("http://jampad.test/api/auth/login", {
+                    .post(process.env.VUE_APP_API_URL+"auth/login", {
                         email: this.email,
                         password: this.password
                     })
                     .then(response => {
                         this.$store.commit('user/loginSuccess', response.data.access_token);
-                        let t = this.$store.state.user.token;
-                        if (t) {
-                            this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + t;
+                        let token = this.$store.state.user.token;
+
+                        if (token) {
+                            this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
                         }
-                        this.user();
-                        console.log('Login done');
+
+                        this.$store.dispatch('user/fetchUser');
                     })
                     .catch((error) => {
                         console.error(error);
@@ -116,7 +123,7 @@
 
             logout() {
                 this.$http
-                    .get("http://jampad.test/api/auth/logout")
+                    .get(process.env.VUE_APP_API_URL+"auth/logout")
                     .then(response => {
                         console.log(response);
                     })
@@ -124,21 +131,6 @@
                         console.error(error);
                     });
             },
-
-            user() {
-                this.$http
-                    .get("http://jampad.test/api/auth/user")
-                    .then(response => {
-                        this.$store.commit('user/updateFirstName', response.data.first_name);
-                        this.$store.commit('user/updateLastName', response.data.last_name);
-                        this.$store.commit('user/updateEmail', response.data.email);
-                        this.$store.commit('user/updateUserId', response.data.id);
-                        console.log(response);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            }
         },
         components: {
             TopNavigation,

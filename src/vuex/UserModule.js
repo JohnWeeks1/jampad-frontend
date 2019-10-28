@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export default {
     namespaced : true,
     state      : {
@@ -25,13 +27,13 @@ export default {
         },
     },
     actions: {
-        fetchUser({commit}) {
-            this.$http
-                .get("http://jampad.test/api/auth/user")
+        fetchUser({ commit }) {
+            axios.get(process.env.VUE_APP_API_URL+"auth/user")
                 .then(response => {
-                    this.$store.commit('user/updateFirstName', response.data.first_name);
-                    this.$store.commit('user/updateLastName', response.data.last_name);
-                    this.$store.commit('user/updateEmail', response.data.email);
+                    commit('updateFirstName', response.data.first_name);
+                    commit('updateLastName', response.data.last_name);
+                    commit('updateEmail', response.data.email);
+                    commit('updateUserId', response.data.id);
                 })
                 .catch(error => {
                     console.log(error);
@@ -39,13 +41,12 @@ export default {
         }
     },
     getters: {
-        getUser: (state) => {
-            return {
-                firstName : state.firstName,
-                lastName  : state.lastName,
-                email     : state.email,
-                id        : state.userId,
-            }
-        },
+        getFirstName: state => state.firstName,
+
+        getLastName: state => state.lastName,
+
+        getEmail: state => state.email,
+
+        getUserId: state => state.id,
     }
 }
