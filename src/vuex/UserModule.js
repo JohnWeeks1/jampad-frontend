@@ -30,10 +30,10 @@ export default {
         fetchUser({ commit }) {
             axios.get(process.env.VUE_APP_API_URL+"auth/user")
                 .then(response => {
-                    commit('updateFirstName', response.data.first_name);
-                    commit('updateLastName', response.data.last_name);
-                    commit('updateEmail', response.data.email);
-                    commit('updateUserId', response.data.id);
+                    commit('updateFirstName', response.data.data.first_name);
+                    commit('updateLastName', response.data.data.last_name);
+                    commit('updateEmail', response.data.data.email);
+                    commit('updateUserId', response.data.data.id);
                 })
                 .catch(error => {
                     console.log(error);
