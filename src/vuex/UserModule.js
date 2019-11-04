@@ -28,15 +28,13 @@ export default {
     },
     actions: {
         fetchUser({ commit }) {
-            axios.get(process.env.VUE_APP_API_URL+"auth/user")
+            axios.get("http://jampad.localhost:8089/api/auth/user")
                 .then(response => {
+                    console.log(response);
                     commit('updateFirstName', response.data.data.first_name);
                     commit('updateLastName', response.data.data.last_name);
                     commit('updateEmail', response.data.data.email);
                     commit('updateUserId', response.data.data.id);
-                })
-                .catch(error => {
-                    console.log(error);
                 });
         }
     },

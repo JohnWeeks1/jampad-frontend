@@ -9,6 +9,12 @@ Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;
 
+let token = store.state.user.token;
+
+if (token) {
+  this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+}
+
 new Vue({
   router,
   store,
