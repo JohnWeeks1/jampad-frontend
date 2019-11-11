@@ -68,7 +68,7 @@
         },
         methods: {
             register() {
-                this.$http.post('http://jampad.test/api/auth/register', {
+                this.$http.post('http://jampad.localhost:8089/api/auth/register', {
                     first_name: this.firstName,
                     last_name: this.lastName,
                     email: this.email,
@@ -83,7 +83,7 @@
                     });
             },
             login() {
-                this.$http.post('http://jampad.test/api/auth/login', {
+                this.$http.post('http://jampad.localhost:8089/api/auth/login', {
                     email: this.email,
                     password: this.password,
                 })

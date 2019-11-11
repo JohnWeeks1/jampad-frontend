@@ -100,14 +100,7 @@
                         if (token) {
                             this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
                         }
-
-                        setTimeout(() => {
-                            this.$store.dispatch('user/fetchUser');
-                        }, 500);
-
-                        setTimeout(() => {
-                            window.location.href = '/profile';
-                        }, 1000);
+                        this.$store.dispatch('user/fetchUser');
                     })
                     .catch((error) => {
                         console.error(error);

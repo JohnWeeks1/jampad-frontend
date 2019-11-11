@@ -32,8 +32,9 @@ export default {
     },
     actions: {
         fetchUser({ commit }) {
-            axios.get(process.env.VUE_APP_API_URL+"auth/user")
+            axios.get(process.env.VUE_APP_API_URL + "auth/user")
                 .then(response => {
+                    console.log(response);
                     commit('updateFirstName', response.data.first_name);
                     commit('updateLastName', response.data.last_name);
                     commit('updateEmail', response.data.email);
