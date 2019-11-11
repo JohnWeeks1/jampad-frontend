@@ -12,7 +12,9 @@
                     />
                 </div>
                 <div class="w-full pl-4 md:w-2/3 md:pr-6">
-                    <h1 class="text-2xl md:text-4xl text-gray-900 mb-3">Profile name</h1>
+                    <h1 class="text-2xl md:text-4xl text-gray-900 mb-3">
+                        {{ fullName }}
+                    </h1>
                     <p class="text-md md:text-lg text-gray-600 leading-normal">
                         This is a description section
                     </p>
@@ -34,9 +36,22 @@
 
     export default {
         name: "Profile",
+        data() {
+            return {
+                fullName: null
+            }
+        },
+        mounted() {
+            this.fullName = this.getFullName();
+        },
+        methods: {
+            getFullName() {
+                return this.$store.getters['user/getFirstName'] + ' ' + this.$store.getters['user/getLastName'];
+            }
+        },
         components: {
             TopNavigation,
             FooterComponent
-        }
+        },
     };
 </script>

@@ -1,8 +1,6 @@
 <template>
     <div>
         <top-navigation></top-navigation>
-        {{this.$store.state.user}}
-        {{firsName}}
         <div class="min-h-screen w-full p-6 bg-gray-300 flex justify-center items-center">
             <div class="w-full max-w-xs">
                 <div class="bg-white border p-8 shadow rounded w-full mb-6">
@@ -60,13 +58,6 @@
                     >
                         Sign in
                     </button>
-                    <button
-                        type="submit"
-                        @click="logout"
-                        class="block w-full bg-black text-white rounded-sm py-3 text-sm tracking-wide"
-                    >
-                        Logout
-                    </button>
                 </div>
                 <p class="text-center text-sm text-gray-600 font-thin">
                     Don't have an account yet?
@@ -94,11 +85,6 @@
                 password: null
             }
         },
-        computed: {
-            firsName() {
-                return this.$store.getters['user/getFirstName'];
-            },
-        },
         methods: {
             login() {
                 this.$http
@@ -107,6 +93,7 @@
                         password: this.password
                     })
                     .then(response => {
+                        console.log(response);
                         this.$store.commit('user/loginSuccess', response.data.access_token);
                         let token = this.$store.state.user.token;
 
@@ -114,18 +101,13 @@
                             this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
                         }
 
-                        this.$store.dispatch('user/fetchUser');
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
-            },
+                        setTimeout(() => {
+                            this.$store.dispatch('user/fetchUser');
+                        }, 500);
 
-            logout() {
-                this.$http
-                    .get(process.env.VUE_APP_API_URL+"auth/logout")
-                    .then(response => {
-                        console.log(response);
+                        setTimeout(() => {
+                            window.location.href = '/profile';
+                        }, 1000);
                     })
                     .catch((error) => {
                         console.error(error);

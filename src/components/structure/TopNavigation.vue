@@ -1,5 +1,6 @@
 <template>
     <nav class="w-full px-6 bg-white shadow-lg relative z-20">
+        {{this.$store.state.user}}
         <div class="container mx-auto max-w-4xl h-16 flex justify-between text-xs md:text-sm">
             <div class="h-full flex items-center">
                 <router-link  class="mr-4"

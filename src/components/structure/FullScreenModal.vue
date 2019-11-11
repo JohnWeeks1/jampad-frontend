@@ -14,19 +14,26 @@
                 <!--Title-->
                 <p class="text-2xl text-center text-white font-bold">Menu</p>
                 <!--Body-->
-                <div class="flex pt-2">
+                <div class="flex pt-2" v-if="!isLoggedIn">
                     <router-link
                         class="text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
                         :to="{ name: 'Login' }">
                         Login
                     </router-link>
                 </div>
-                <div class="flex pt-2">
+                <div class="flex pt-2" v-if="!isLoggedIn">
                     <router-link
                         class="text-center bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded w-full"
                         :to="{ name: 'Register' }">
                         Register
                     </router-link>
+                </div>
+                <div class="flex pt-2" v-if="isLoggedIn">
+                    <button
+                        @click="logout"
+                        class="text-center bg-yellow-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full" >
+                        Logout
+                    </button>
                 </div>
                 <!--Footer-->
                 <div class="flex pt-2">
@@ -47,6 +54,25 @@
         data() {
             return {
                 open: false
+            }
+        },
+        computed: {
+            isLoggedIn() {
+                return this.$store.getters['user/getIsLoggedIn'];
+            },
+        },
+        methods: {
+            logout() {
+                window.localStorage.clear();
+                window.location = '/';
+                // this.$http
+                //     .get(process.env.VUE_APP_API_URL+"auth/logout")
+                //     .then(response => {
+                //         console.log(response);
+                //     })
+                //     .catch((error) => {
+                //         console.error(error);
+                //     });
             }
         }
     };
