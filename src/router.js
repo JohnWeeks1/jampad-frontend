@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "./views/Home.vue";
+import AuthMiddleware from '@/middleware/AuthMiddleware'
 
 Vue.use(VueRouter);
 
@@ -13,9 +14,6 @@ const routes = [
     {
         path: "/about",
         name: "About",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () =>
             import(/* webpackChunkName: "about" */ "./views/About.vue")
     },
@@ -34,14 +32,17 @@ const routes = [
     {
         path: '/profile',
         name: 'Profile',
-        component: () => import(/* webpackChunkName: "style" */ './views/Profile')
+        beforeEnter: AuthMiddleware,
+        component: () =>
+            import(/* webpackChunkName: "profile" */ './views/Profile')
     },
     {
         path: "/all-posts",
         name: "AllPosts",
+        beforeEnter: AuthMiddleware,
         component: () =>
-            import(/* webpackChunkName: "login" */ "./views/AllPosts.vue")
-    }
+            import(/* webpackChunkName: "all-posts" */ "./views/AllPosts.vue")
+    },
 ];
 
 const router = new VueRouter({
