@@ -30,18 +30,25 @@ const routes = [
             import(/* webpackChunkName: "login" */ "./views/Register.vue")
     },
     {
-        path: '/profile',
+        path: '/account/profile',
         name: 'Profile',
         beforeEnter: AuthMiddleware,
         component: () =>
-            import(/* webpackChunkName: "profile" */ './views/Profile')
+            import(/* webpackChunkName: "profile" */ './views/account/Profile')
     },
     {
-        path: "/all-posts",
+        path: '/account/edit-profile',
+        name: 'EditProfile',
+        beforeEnter: AuthMiddleware,
+        component: () =>
+            import(/* webpackChunkName: "edit-profile" */ './views/account/EditProfile')
+    },
+    {
+        path: "/account/all-posts",
         name: "AllPosts",
         beforeEnter: AuthMiddleware,
         component: () =>
-            import(/* webpackChunkName: "all-posts" */ "./views/AllPosts.vue")
+            import(/* webpackChunkName: "all-posts" */ "./views/account/AllPosts.vue")
     },
 ];
 

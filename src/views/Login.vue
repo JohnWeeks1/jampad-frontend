@@ -93,7 +93,6 @@
                         password: this.password
                     })
                     .then(response => {
-                        console.log(response);
                         this.$store.commit('user/loginSuccess', response.data.access_token);
                         let token = this.$store.state.user.token;
 
