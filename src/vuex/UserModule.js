@@ -7,6 +7,7 @@ export default {
         isLoggedIn: false,
         firstName: null,
         lastName: null,
+        description: null,
         userId: null,
         email: null,
     },
@@ -19,6 +20,9 @@ export default {
         },
         updateLastName(state, payload) {
             state.lastName = payload
+        },
+        updateDescription(state, payload) {
+            state.description = payload
         },
         updateUserId(state, payload) {
             state.userId = payload
@@ -36,6 +40,7 @@ export default {
                 .then(response => {
                     commit('updateFirstName', response.data.first_name);
                     commit('updateLastName', response.data.last_name);
+                    commit('updateDescription', response.data.description);
                     commit('updateEmail', response.data.email);
                     commit('updateUserId', response.data.id);
                     commit('updateIsLoggedIn', true);
@@ -49,6 +54,8 @@ export default {
         getFirstName: state => state.firstName,
 
         getLastName: state => state.lastName,
+
+        getDescription: state => state.description,
 
         getEmail: state => state.email,
 

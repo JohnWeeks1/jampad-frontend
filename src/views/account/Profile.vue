@@ -14,7 +14,7 @@
                         {{ fullName }}
                     </h1>
                     <p class="text-md md:text-lg text-gray-600 leading-normal">
-                        This is a description section
+                        {{ description }}
                     </p>
                     <router-link
                         class="mt-6 inline-block bg-white text-black no-underline px-4 py-3 shadow-lg"
@@ -36,15 +36,20 @@
         name: "Profile",
         data() {
             return {
-                fullName: null
+                fullName: null,
+                description: null
             }
         },
         mounted() {
             this.fullName = this.getFullName();
+            this.description = this.getDescription();
         },
         methods: {
             getFullName() {
                 return this.$store.getters['user/getFirstName'] + ' ' + this.$store.getters['user/getLastName'];
+            },
+            getDescription() {
+                return this.$store.getters['user/getDescription'];
             }
         },
         components: {
