@@ -68,7 +68,7 @@
         },
         methods: {
             register() {
-                this.$http.post('http://jampad.localhost:8089/api/auth/register', {
+                this.$http.post(process.env.VUE_APP_API_URL+'auth/register', {
                     first_name: this.firstName,
                     last_name: this.lastName,
                     email: this.email,
@@ -83,7 +83,7 @@
                     });
             },
             login() {
-                this.$http.post('http://jampad.localhost:8089/api/auth/login', {
+                this.$http.post(process.env.VUE_APP_API_URL+'auth/login', {
                     email: this.email,
                     password: this.password,
                 })
