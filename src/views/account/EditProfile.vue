@@ -1,7 +1,7 @@
 <template>
     <div>
         <top-navigation></top-navigation>
-        {{this.$store.state.user.userId}}
+        {{imgDataUrl}}
         <div class="container mx-auto w-full max-w-lg pt-20 pb-20">
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -33,6 +33,29 @@
                 <div class="w-full px-3">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                            for="description">
+                        Profile Picture
+                    </label>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            @click="toggleShow">Upload Profile Picture</button>
+                    <my-upload field="img"
+                               @crop-success="cropSuccess"
+                               @crop-upload-success="cropUploadSuccess"
+                               @crop-upload-fail="cropUploadFail"
+                               v-model="show"
+                               :width="300"
+                               :height="300"
+                               lang-type="en"
+                               img-format="png"></my-upload>
+                    <div v-if="imgDataUrl !== ''">
+                        <img class="rounded py-4" :src="imgDataUrl">
+                    </div>
+
+                </div>
+            </div>
+            <div class="flex flex-wrap -mx-3 mb-6">
+                <div class="w-full px-3">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                           for="description">
                         Description
                     </label>
                     <textarea
@@ -42,66 +65,6 @@
                     </textarea>
                 </div>
             </div>
-<!--            <div class="flex flex-wrap -mx-3 mb-6">-->
-<!--                <div class="w-full px-3">-->
-<!--                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"-->
-<!--                           for="grid-password">-->
-<!--                        Password-->
-<!--                    </label>-->
-<!--                    <input-->
-<!--                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded -->
-<!--                        py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"-->
-<!--                        id="grid-password" -->
-<!--                        type="password" -->
-<!--                        placeholder="******************">-->
-<!--                    <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="flex flex-wrap -mx-3 mb-2">-->
-<!--                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">-->
-<!--                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">-->
-<!--                        City-->
-<!--                    </label>-->
-<!--                    <input-->
-<!--                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-->
-<!--                        py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"-->
-<!--                        id="grid-city"-->
-<!--                        type="text"-->
-<!--                        placeholder="Albuquerque">-->
-<!--                </div>-->
-<!--                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">-->
-<!--                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">-->
-<!--                        State-->
-<!--                    </label>-->
-<!--                    <div class="relative">-->
-<!--                        <select-->
-<!--                            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3-->
-<!--                            px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"-->
-<!--                            id="grid-state">-->
-<!--                            <option>New Mexico</option>-->
-<!--                            <option>Missouri</option>-->
-<!--                            <option>Texas</option>-->
-<!--                        </select>-->
-<!--                        <div-->
-<!--                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">-->
-<!--                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">-->
-<!--                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>-->
-<!--                            </svg>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">-->
-<!--                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">-->
-<!--                        Zip-->
-<!--                    </label>-->
-<!--                    <input-->
-<!--                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-->
-<!--                        py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"-->
-<!--                        id="grid-zip"-->
-<!--                        type="text"-->
-<!--                        placeholder="90210">-->
-<!--                </div>-->
-<!--            </div>-->
             <div class="flex flex-wrap mt-8 -mx-3 mb-6">
                 <div class="w-full px-3">
                     <button class="float-right bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -118,7 +81,8 @@
 <script>
     import TopNavigation from "@/components/structure/TopNavigation";
     import FooterComponent from "@/components/structure/Footer";
-    import {HTTP} from "@/http-common";
+    // import {HTTP} from "@/http-common";
+    import myUpload from 'vue-image-crop-upload/upload-2.vue';
 
     export default {
         name: "EditProfile",
@@ -127,18 +91,27 @@
                 firstName: null,
                 lastName: null,
                 description: null,
+                show: false,
+                imgDataUrl: '' // the datebase64 url of created image
             }
         },
         mounted() {
             this.firstName = this.getFirstName();
             this.lastName = this.getLastName();
+            this.description = this.getDescription();
         },
         methods: {
+            toggleShow() {
+                this.show = !this.show;
+            },
             getFirstName() {
                 return this.$store.getters['user/getFirstName']
             },
             getLastName() {
                 return this.$store.getters['user/getLastName']
+            },
+            getDescription() {
+                return this.$store.getters['user/getDescription']
             },
             updateProfile() {
                 let token = this.$store.state.user.token;
@@ -146,23 +119,57 @@
                 if (token) {
                     this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
                 }
-                this.$http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-                HTTP.patch(process.env.VUE_APP_API_URL+'auth/user/'+this.$store.state.user.userId, {
+                this.$http.patch(process.env.VUE_APP_API_URL+'auth/user/'+this.$store.state.user.userId, {
                         first_name: this.firstName,
                         last_name: this.lastName,
-                        description: this.description
+                        description: this.description,
+                        image: this.imgDataUrl
                     })
                     .then(response => {
                         console.log(response);
+                        this.$store.dispatch('user/fetchUser');
                     })
                     .catch(error => {
                         console.error(error);
                     });
             },
+            /**
+             * crop success
+             *
+             * [param] imgDataUrl
+             * [param] field
+             */
+            cropSuccess(imgDataUrl){
+                console.log('-------- crop success --------');
+                this.imgDataUrl = imgDataUrl;
+            },
+            /**
+             * upload success
+             *
+             * [param] jsonData   server api return data, already json encode
+             * [param] field
+             */
+            cropUploadSuccess(jsonData, field){
+                console.log('-------- upload success --------');
+                console.log(jsonData);
+                console.log('field: ' + field);
+            },
+            /**
+             * upload fail
+             *
+             * [param] status    server api return error status, like 500
+             * [param] field
+             */
+            cropUploadFail(status, field){
+                console.log('-------- upload fail --------');
+                console.log(status);
+                console.log('field: ' + field);
+            },
         },
         components: {
             TopNavigation,
-            FooterComponent
+            FooterComponent,
+            myUpload
         },
     };
 </script>
