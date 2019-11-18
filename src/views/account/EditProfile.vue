@@ -33,29 +33,6 @@
                 <div class="w-full px-3">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                            for="description">
-                        Profile Picture
-                    </label>
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                            @click="toggleShow">Upload Profile Picture</button>
-                    <my-upload field="img"
-                               @crop-success="cropSuccess"
-                               @crop-upload-success="cropUploadSuccess"
-                               @crop-upload-fail="cropUploadFail"
-                               v-model="show"
-                               :width="300"
-                               :height="300"
-                               lang-type="en"
-                               img-format="png"></my-upload>
-                    <div v-if="imgDataUrl !== ''">
-                        <img class="rounded py-4" :src="imgDataUrl">
-                    </div>
-
-                </div>
-            </div>
-            <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full px-3">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                           for="description">
                         Description
                     </label>
                     <textarea
@@ -81,8 +58,6 @@
 <script>
     import TopNavigation from "@/components/structure/TopNavigation";
     import FooterComponent from "@/components/structure/Footer";
-    // import {HTTP} from "@/http-common";
-    import myUpload from 'vue-image-crop-upload/upload-2.vue';
 
     export default {
         name: "EditProfile",
@@ -90,9 +65,7 @@
             return {
                 firstName: null,
                 lastName: null,
-                description: null,
-                show: false,
-                imgDataUrl: '' // the datebase64 url of created image
+                description: null
             }
         },
         mounted() {
@@ -123,7 +96,6 @@
                         first_name: this.firstName,
                         last_name: this.lastName,
                         description: this.description,
-                        image: this.imgDataUrl
                     })
                     .then(response => {
                         console.log(response);
@@ -133,43 +105,10 @@
                         console.error(error);
                     });
             },
-            /**
-             * crop success
-             *
-             * [param] imgDataUrl
-             * [param] field
-             */
-            cropSuccess(imgDataUrl){
-                console.log('-------- crop success --------');
-                this.imgDataUrl = imgDataUrl;
-            },
-            /**
-             * upload success
-             *
-             * [param] jsonData   server api return data, already json encode
-             * [param] field
-             */
-            cropUploadSuccess(jsonData, field){
-                console.log('-------- upload success --------');
-                console.log(jsonData);
-                console.log('field: ' + field);
-            },
-            /**
-             * upload fail
-             *
-             * [param] status    server api return error status, like 500
-             * [param] field
-             */
-            cropUploadFail(status, field){
-                console.log('-------- upload fail --------');
-                console.log(status);
-                console.log('field: ' + field);
-            },
         },
         components: {
             TopNavigation,
             FooterComponent,
-            myUpload
         },
     };
 </script>
