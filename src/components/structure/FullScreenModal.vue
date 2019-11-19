@@ -29,6 +29,13 @@
                     </router-link>
                 </div>
                 <div class="flex pt-2" v-if="isLoggedIn">
+                    <router-link
+                        class="text-center bg-green-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded w-full"
+                        :to="{ name: 'Profile' }">
+                        Profile
+                    </router-link>
+                </div>
+                <div class="flex pt-2" v-if="isLoggedIn">
                     <button
                         @click="logout"
                         class="text-center bg-yellow-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full" >

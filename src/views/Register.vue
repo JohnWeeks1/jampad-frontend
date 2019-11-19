@@ -9,7 +9,7 @@
                         <label class="block text-sm text-gray-900 mb-2">First name</label>
                         <input id="first_name" type="text" v-model="firstName"
                                class="block w-full rounded-sm border bg-white py-2 px-3 text-sm"
-                               name="first_name"
+                                       name="first_name"
                                required autofocus>
                     </fieldset>
                     <fieldset class="mb-4">
@@ -68,7 +68,7 @@
         },
         methods: {
             register() {
-                this.$http.post(process.env.VUE_APP_API_URL+'auth/register', {
+                this.$http.post(process.env.VUE_APP_API_URL + 'auth/register', {
                     first_name: this.firstName,
                     last_name: this.lastName,
                     email: this.email,
@@ -76,28 +76,41 @@
                     password_confirmation: this.confirmPassword,
                 })
                     .then(() => {
-                        this.login();
+                        setTimeout(() => {
+                            this.login();
+                        }, 1000);
                     })
                     .catch((error) => {
                         console.error(error);
                     });
             },
             login() {
-                this.$http.post(process.env.VUE_APP_API_URL+'auth/login', {
-                    email: this.email,
-                    password: this.password,
-                })
-                    .then((response) => {
-                        console.log(response);
+                this.$http
+                    .post(process.env.VUE_APP_API_URL + "auth/login", {
+                        email: this.email,
+                        password: this.password
+                    })
+                    .then(response => {
+                        this.$store.commit('user/loginSuccess', response.data.access_token);
+                        let token = this.$store.state.user.token;
+
+                        if (token) {
+                            this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+                        }
+                        this.$store.dispatch('user/fetchUser');
+                        setTimeout(() => {
+                            this.$router.push('/account/profile');
+                        }, 500);
                     })
                     .catch((error) => {
                         console.error(error);
                     });
+
             },
         },
         components: {
             TopNavigation,
             FooterComponent
-        }
+        },
     };
 </script>
