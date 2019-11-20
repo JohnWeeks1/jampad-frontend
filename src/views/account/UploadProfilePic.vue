@@ -7,7 +7,7 @@
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Profile Picture
                     </label>
-                    <input class="py-4" type="file" v-on:change="getUploadedImage">
+                    <input class="py-4" type="file" v-on:change="getUploadedImage" id="image" ref="fileInput">
                     <Cropper
                         :src="uploadedImage"
                         ref="cropper"
@@ -78,8 +78,15 @@
             updateProfilePic() {
                 let token = this.$store.state.user.token;
 
-                this.$http.post(process.env.VUE_APP_API_URL+'auth/user/'+this.$store.state.user.userId, {
-                        image: this.image,
+                let data = new FormData();
+                let file = this.$refs.fileInput.files[0]
+                data.append('image', file);
+                data.append('height', this.coordinates.height);
+                data.append('width', this.coordinates.width);
+                data.append('left', this.coordinates.left);
+                data.append('top', this.coordinates.top);
+
+                this.$http.post(process.env.VUE_APP_API_URL+'auth/user/'+this.$store.state.user.userId, data, {
                         headers: {
                             'Authorization': 'Bearer ' + token,
                             'Content-Type': 'multipart/form-data'
@@ -87,7 +94,7 @@
                     })
                     .then(response => {
                         console.log(response);
-                        this.$store.dispatch('user/fetchUser');
+                        // this.$store.dispatch('user/fetchUser');
                     })
                     .catch(error => {
                         console.error(error);
