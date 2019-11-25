@@ -100,7 +100,7 @@
                             this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
                         }
                         this.$store.dispatch('user/fetchUser');
-                        this.$router.push({ name: 'Profile' });
+                        this.$router.push('/account/profile');
                     })
                     .catch((error) => {
                         console.error(error);

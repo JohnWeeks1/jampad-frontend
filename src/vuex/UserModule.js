@@ -8,6 +8,7 @@ export default {
         firstName: null,
         lastName: null,
         description: null,
+        image: null,
         userId: null,
         email: null,
     },
@@ -30,6 +31,9 @@ export default {
         updateEmail(state, payload) {
             state.email = payload
         },
+        updateImage(state, payload) {
+            state.image = payload
+        },
         updateIsLoggedIn(state, payload) {
             state.isLoggedIn = payload
         },
@@ -38,10 +42,12 @@ export default {
         fetchUser({ commit }) {
             axios.get(process.env.VUE_APP_API_URL + "auth/user")
                 .then(response => {
+                    console.log(response);
                     commit('updateFirstName', response.data.first_name);
                     commit('updateLastName', response.data.last_name);
                     commit('updateDescription', response.data.description);
                     commit('updateEmail', response.data.email);
+                    commit('updateImage', response.data.image);
                     commit('updateUserId', response.data.id);
                     commit('updateIsLoggedIn', true);
                 })
@@ -58,6 +64,8 @@ export default {
         getDescription: state => state.description,
 
         getEmail: state => state.email,
+
+        getImage: state => state.image,
 
         getUserId: state => state.id,
 

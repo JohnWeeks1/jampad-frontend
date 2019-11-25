@@ -94,7 +94,6 @@
                         description: this.description,
                     })
                     .then(response => {
-                        console.log(response);
                         this.$store.dispatch('user/fetchUser');
                     })
                     .catch(error => {

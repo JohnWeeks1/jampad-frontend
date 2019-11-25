@@ -5,7 +5,7 @@
             <div class="container max-w-4xl mx-auto text-left flex items-center flex-wrap">
                 <div class="hidden md:block w-1/3">
                     <img
-                        src="https://images.unsplash.com/photo-1506152983158-b4a74a01c721?w=800"
+                        :src="image"
                         class="w-full h-auto shadow-lg"
                     />
                 </div>
@@ -37,12 +37,14 @@
         data() {
             return {
                 fullName: null,
-                description: null
+                description: null,
+                image: null
             }
         },
         mounted() {
             this.fullName = this.getFullName();
             this.description = this.getDescription();
+            this.image = this.getImage();
         },
         methods: {
             getFullName() {
@@ -50,6 +52,9 @@
             },
             getDescription() {
                 return this.$store.getters['user/getDescription'];
+            },
+            getImage() {
+                return this.$store.getters['user/getImage'];
             }
         },
         components: {

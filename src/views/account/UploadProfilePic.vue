@@ -41,7 +41,7 @@
             </div>
         </div>
         <footer-component></footer-component>
-    </div>
+    </div>login
 </template>
 
 <script>
@@ -93,7 +93,6 @@
                         }
                     })
                     .then(response => {
-                        console.log(response);
                         // this.$store.dispatch('user/fetchUser');
                     })
                     .catch(error => {
