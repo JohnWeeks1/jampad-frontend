@@ -8,29 +8,21 @@
       >
         <div class="mb-4">
           <h4 class="mb-4">Quick links</h4>
-          <a href="#" class="block text-gray-900 mb-2">About</a>
-          <a href="#" class="block text-gray-900 mb-2">Products</a>
-          <a href="#" class="block text-gray-900 mb-2">Services</a>
-          <a href="#" class="block text-gray-900 mb-2">FAQ</a>
-          <a href="#" class="block text-gray-900 mb-2">Contact</a>
-          <a href="#" class="block text-gray-900 mb-2">Delivery</a>
+          <a href="#" class="block text-gray-900 mb-2">Home</a>
+          <a href="#" class="block text-gray-900 mb-2">Profile</a>
         </div>
         <div class="mb-4">
           <h4 class="mb-4">Categories</h4>
-          <a href="#" class="block text-gray-900 mb-2">Food</a>
-          <a href="#" class="block text-gray-900 mb-2">Drink</a>
-          <a href="#" class="block text-gray-900 mb-2">Homeware</a>
-          <a href="#" class="block text-gray-900 mb-2">Kitchen</a>
-          <a href="#" class="block text-gray-900 mb-2">Outdoor</a>
-          <a href="#" class="block text-gray-900 mb-2">Lighting</a>
+          <a href="#" class="block text-gray-900 mb-2">Category 1</a>
+          <a href="#" class="block text-gray-900 mb-2">Category 2</a>
         </div>
         <div class="mb-4">
           <h4 class="mb-4">About Our Company</h4>
 
           <p class="mb-4 leading-normal">
-            108 Stamford Road<br />
-            ANGERSLEIGH<br />
-            TA3 6NY
+            123 Main Street<br />
+            London<br />
+            SW1 SW1
           </p>
 
           <p class="text-sm">079 6293 6068</p>

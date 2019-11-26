@@ -41,7 +41,7 @@
             </div>
         </div>
         <footer-component></footer-component>
-    </div>login
+    </div>
 </template>
 
 <script>
@@ -92,8 +92,11 @@
                             'Content-Type': 'multipart/form-data'
                         }
                     })
-                    .then(response => {
-                        // this.$store.dispatch('user/fetchUser');
+                    .then(() => {
+                        this.$store.dispatch('user/fetchUser');
+                        setTimeout(() => {
+                            this.$router.push('/account/profile');
+                        }, 500);
                     })
                     .catch(error => {
                         console.error(error);

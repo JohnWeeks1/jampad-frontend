@@ -7,10 +7,8 @@
                     <img
                         :src="image"
                         alt="Base64 encoded image"
-                        class="w-full h-auto shadow-lg"
-                    />
+                        class="w-full h-auto shadow-lg"/>
                 </div>
-                {{image}}
                 <div class="w-full pl-4 md:w-2/3 md:pr-6">
                     <h1 class="text-2xl md:text-4xl text-gray-900 mb-3">
                         {{ fullName }}
@@ -21,7 +19,7 @@
                     <router-link
                         class="mt-6 inline-block bg-white text-black no-underline px-4 py-3 shadow-lg"
                         :to="{ name: 'EditProfile' }">
-                        Register
+                        Edit Profile
                     </router-link>
                 </div>
             </div>
@@ -40,7 +38,7 @@
             return {
                 fullName: null,
                 description: null,
-                image: '',
+                image: ''
             }
         },
         mounted() {
@@ -56,16 +54,13 @@
                 return this.$store.getters['user/getDescription'];
             },
             getImage() {
-                this.profilePic = '';
                 this.$http.get(process.env.VUE_APP_API_URL+"auth/image", {
                     headers: {
-                        'Authorization': 'Bearer ' + this.$store.state.user.token,
-                        'Content-type': 'image/jpeg'
+                        'Authorization': 'Bearer ' + this.$store.state.user.token
                     }
                 })
-                    .then(response => {
-                        console.log(response.data);
-                        this.image = 'data:image/jpeg;base64, '.concat(this.profilePic.concat(response.data))
+                    .then(() => {
+                        this.image = process.env.VUE_APP_API_URL + 'auth/image';
                     })
                     .catch(error => {
                         console.error(error);
