@@ -54,11 +54,7 @@
                 return this.$store.getters['user/getDescription'];
             },
             getImage() {
-                this.$http.get(process.env.VUE_APP_API_URL+"auth/image", {
-                    headers: {
-                        'Authorization': 'Bearer ' + this.$store.state.user.token
-                    }
-                })
+                this.$http.get("auth/image")
                     .then(() => {
                         this.image = process.env.VUE_APP_API_URL + 'auth/image';
                     })

@@ -14,6 +14,7 @@
                         id="grid-first-name"
                         type="text"
                         v-model="firstName">
+                        <span v-if="errors['first_name']" class="text-red-500">{{errors['first_name'][0]}}</span>
                 </div>
                 <div class="w-full md:w-1/2 px-3">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -26,6 +27,7 @@
                         id="grid-last-name"
                         type="text"
                         v-model="lastName">
+                    <span v-if="errors['last_name']" class="text-red-500">{{errors['last_name'][0]}}</span>
                 </div>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
@@ -74,9 +76,10 @@
         name: "EditProfile",
         data() {
             return {
-                firstName: null,
-                lastName: null,
-                description: null
+                firstName: '',
+                lastName: '',
+                description: '',
+                errors: []
             }
         },
         mounted() {
@@ -95,21 +98,19 @@
                 return this.$store.getters['user/getDescription']
             },
             updateProfile() {
-                let token = this.$store.state.user.token;
-
-                if (token) {
-                    this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-                }
-                this.$http.patch(process.env.VUE_APP_API_URL+'auth/user/'+this.$store.state.user.userId, {
+                this.$http.patch("auth/user/" + this.$store.state.user.userId, {
                         first_name: this.firstName,
                         last_name: this.lastName,
                         description: this.description,
                     })
                     .then(response => {
+                        console.log(response);
+                        this.errors = response;
+                        this.$router.push({ name: 'Profile'});
                         this.$store.dispatch('user/fetchUser');
                     })
                     .catch(error => {
-                        console.error(error);
+                        this.errors = error.response.data.errors;
                     });
             },
         },

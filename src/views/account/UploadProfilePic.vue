@@ -76,8 +76,6 @@
                 this.image = canvas.toDataURL();
             },
             updateProfilePic() {
-                let token = this.$store.state.user.token;
-
                 let data = new FormData();
                 let file = this.$refs.fileInput.files[0]
                 data.append('image', file);
@@ -86,17 +84,14 @@
                 data.append('left', this.coordinates.left);
                 data.append('top', this.coordinates.top);
 
-                this.$http.post(process.env.VUE_APP_API_URL+'auth/user/'+this.$store.state.user.userId, data, {
+                this.$http.post("auth/user/" + this.$store.state.user.userId, data, {
                         headers: {
-                            'Authorization': 'Bearer ' + token,
                             'Content-Type': 'multipart/form-data'
                         }
                     })
                     .then(() => {
                         this.$store.dispatch('user/fetchUser');
-                        setTimeout(() => {
-                            this.$router.push('/account/profile');
-                        }, 500);
+                        this.$router.push({ name: 'Profile'});
                     })
                     .catch(error => {
                         console.error(error);

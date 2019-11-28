@@ -40,7 +40,7 @@ export default {
     },
     actions: {
         fetchUser({ commit }) {
-            axios.get(process.env.VUE_APP_API_URL + "auth/user")
+            axios.get("auth/user")
                 .then(response => {
                     // console.log(response.data.image);
                     commit('updateFirstName', response.data.first_name);

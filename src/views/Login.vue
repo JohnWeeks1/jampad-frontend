@@ -88,21 +88,14 @@
         methods: {
             login() {
                 this.$http
-                    .post(process.env.VUE_APP_API_URL+"auth/login", {
+                    .post("auth/login", {
                         email: this.email,
                         password: this.password
                     })
                     .then(response => {
                         this.$store.commit('user/loginSuccess', response.data.access_token);
-                        let token = this.$store.state.user.token;
-
-                        if (token) {
-                            this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-                        }
                         this.$store.dispatch('user/fetchUser');
-                        setTimeout(() => {
-                            this.$router.push('/account/profile');
-                        }, 500);
+                        this.$router.push({ name: 'Profile'});
                     })
                     .catch((error) => {
                         console.error(error);
