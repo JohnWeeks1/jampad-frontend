@@ -95,7 +95,9 @@
                     .then(response => {
                         this.$store.commit('user/loginSuccess', response.data.access_token);
                         this.$store.dispatch('user/fetchUser');
-                        this.$router.push({ name: 'Profile'});
+                        setTimeout(() => {
+                            this.$router.push({ name: 'Profile'});
+                        }, 1000);
                     })
                     .catch((error) => {
                         console.error(error);

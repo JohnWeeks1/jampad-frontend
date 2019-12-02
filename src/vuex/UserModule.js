@@ -1,18 +1,18 @@
 import axios from "axios";
 
 export default {
-    namespaced : true,
-    state      : {
-        token: null,
-        isLoggedIn: false,
-        firstName: null,
-        lastName: null,
+    namespaced: true,
+    state     : {
+        token      : null,
+        isLoggedIn : false,
+        firstName  : null,
+        lastName   : null,
         description: null,
-        image: null,
-        userId: null,
-        email: null,
+        image      : null,
+        userId     : null,
+        email      : null,
     },
-    mutations: {
+    mutations : {
         loginSuccess(state, payload) {
             state.token = payload
         },
@@ -38,11 +38,11 @@ export default {
             state.isLoggedIn = payload
         },
     },
-    actions: {
-        fetchUser({ commit }) {
+    actions   : {
+        fetchUser({commit}) {
             axios.get("auth/user")
                 .then(response => {
-                    // console.log(response.data.image);
+                    console.log(response.data);
                     commit('updateFirstName', response.data.first_name);
                     commit('updateLastName', response.data.last_name);
                     commit('updateDescription', response.data.description);
@@ -56,7 +56,7 @@ export default {
                 });
         }
     },
-    getters: {
+    getters   : {
         getFirstName: state => state.firstName,
 
         getLastName: state => state.lastName,
