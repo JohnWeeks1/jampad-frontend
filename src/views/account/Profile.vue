@@ -4,7 +4,7 @@
         <div class="w-full py-24 px-6 bg-blue-100 relative z-10">
             <div class="container max-w-4xl mx-auto text-left flex items-center flex-wrap">
                 <div class="hidden md:block w-1/3">
-                    <img v-if="image !== ''"
+                    <img v-if="image"
                         :src="image"
                         class="w-full h-auto shadow-lg"/>
                     <router-link v-else :to="{ name: 'UploadProfilePic' }">
@@ -40,7 +40,7 @@
             return {
                 fullName: null,
                 description: null,
-                image: ''
+                image: null
             }
         },
         mounted() {

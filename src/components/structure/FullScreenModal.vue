@@ -57,7 +57,7 @@
 
 <script>
     export default {
-        name: "Hero",
+        name: "FullScreenModal",
         data() {
             return {
                 open: false
@@ -73,9 +73,10 @@
                 window.localStorage.clear();
                 window.location = '/';
                 // this.$http
-                //     .get(process.env.VUE_APP_API_URL+"auth/logout")
-                //     .then(response => {
-                //         console.log(response);
+                //     .get("auth/logout")
+                //     .then(() => {
+                //         window.localStorage.clear();
+                //         window.location = '/';
                 //     })
                 //     .catch((error) => {
                 //         console.error(error);

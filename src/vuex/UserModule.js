@@ -42,13 +42,13 @@ export default {
         fetchUser({commit}) {
             axios.get("auth/user")
                 .then(response => {
-                    console.log(response.data);
-                    commit('updateFirstName', response.data.first_name);
-                    commit('updateLastName', response.data.last_name);
-                    commit('updateDescription', response.data.description);
-                    commit('updateEmail', response.data.email);
-                    commit('updateImage', response.data.image);
-                    commit('updateUserId', response.data.id);
+                    console.log(response.data.data);
+                    commit('updateFirstName', response.data.data.first_name);
+                    commit('updateLastName', response.data.data.last_name);
+                    commit('updateDescription', response.data.data.description);
+                    commit('updateEmail', response.data.data.email);
+                    commit('updateImage', response.data.data.image);
+                    commit('updateUserId', response.data.data.id);
                     commit('updateIsLoggedIn', true);
                 })
                 .catch(error => {
