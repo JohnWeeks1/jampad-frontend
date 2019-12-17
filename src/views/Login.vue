@@ -85,6 +85,8 @@
                 password: null
             }
         },
+
+
         methods: {
             login() {
                 this.$http
@@ -94,10 +96,14 @@
                     })
                     .then(response => {
                         this.$store.commit('user/loginSuccess', response.data.access_token);
-                        this.$store.dispatch('user/fetchUser');
                         setTimeout(() => {
-                            this.$router.push({ name: 'Profile'});
-                        }, 1000);
+                            this.$store.dispatch('user/fetchUser');
+
+                            setTimeout(() => {
+                                this.$router.push({ name: 'Profile'});
+                            }, 1000);
+
+                        },1000);
                     })
                     .catch((error) => {
                         console.error(error);

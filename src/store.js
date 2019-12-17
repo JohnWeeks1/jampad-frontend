@@ -7,9 +7,10 @@ import UserModule from '@/vuex/UserModule';
 Vue.use(Vuex);
 
 const vuexLocalStorage = new VuexPersist({
-    key    : 'jampad',
+    key: 'jampad',
     storage: window.localStorage,
 });
+
 
 export default new Vuex.Store({
     modules: {

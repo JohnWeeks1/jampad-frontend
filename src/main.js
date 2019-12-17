@@ -13,8 +13,9 @@ if (typeof baseURL !== 'undefined') {
     Vue.axios.defaults.baseURL = baseURL;
 }
 
-if (store.state.user.token !== null) {
-    Vue.axios.defaults.headers.common['Authorization'] = 'Bearer ' + store.state.user.token;
+
+if (store.getters['user/getToken'] !== null) {
+    Vue.axios.defaults.headers.common['Authorization'] = 'Bearer ' + store.getters['user/getToken'];
 }
 
 Vue.config.productionTip = false;

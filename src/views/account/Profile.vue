@@ -31,8 +31,8 @@
 </template>
 
 <script>
-    import TopNavigation from "@/components/structure/TopNavigation";
     import FooterComponent from "@/components/structure/Footer";
+    import TopNavigation from "@/components/structure/TopNavigation";
 
     export default {
         name: "Profile",
@@ -56,15 +56,18 @@
                 return this.$store.getters['user/getDescription'];
             },
             getImage() {
-                this.$http.get("auth/image")
-                    .then(() => {
-                        this.image = process.env.VUE_APP_API_URL + 'auth/image';
+                this.$http.get("image")
+                    .then(response => {
+                        if (response.data.image !== null) {
+                            this.image = process.env.VUE_APP_API_URL + 'image';
+                        }
                     })
                     .catch(error => {
-                        console.error(error);
+                        console.error('No image');
                     });
-            }
+            },
         },
+
         components: {
             TopNavigation,
             FooterComponent

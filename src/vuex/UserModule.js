@@ -1,18 +1,30 @@
+import Vue from "vue";
 import axios from "axios";
+import VueAxios from "vue-axios";
+
+Vue.use(VueAxios, axios);
+
+const getDefaultState = () => {
+    return {
+        token: null,
+        isLoggedIn: false,
+        firstName: null,
+        lastName: null,
+        description: null,
+        image: null,
+        userId: null,
+        email: null,
+    };
+};
+
 
 export default {
     namespaced: true,
-    state     : {
-        token      : null,
-        isLoggedIn : false,
-        firstName  : null,
-        lastName   : null,
-        description: null,
-        image      : null,
-        userId     : null,
-        email      : null,
-    },
-    mutations : {
+    state: getDefaultState(),
+    mutations: {
+        resetState (state) {
+            Object.assign(state, getDefaultState());
+        },
         loginSuccess(state, payload) {
             state.token = payload
         },
@@ -38,11 +50,10 @@ export default {
             state.isLoggedIn = payload
         },
     },
-    actions   : {
+    actions: {
         fetchUser({commit}) {
-            axios.get("auth/user")
+            Vue.axios.get("user")
                 .then(response => {
-                    console.log(response.data.data);
                     commit('updateFirstName', response.data.data.first_name);
                     commit('updateLastName', response.data.data.last_name);
                     commit('updateDescription', response.data.data.description);
@@ -52,11 +63,17 @@ export default {
                     commit('updateIsLoggedIn', true);
                 })
                 .catch(error => {
+                    // shit fuck man
                     console.log(error);
                 });
+        },
+        resetState ({ commit }) {
+            commit('resetState');
         }
     },
-    getters   : {
+    getters: {
+        getToken: state => state.token,
+
         getFirstName: state => state.firstName,
 
         getLastName: state => state.lastName,

@@ -70,18 +70,17 @@
         },
         methods: {
             logout() {
-                window.localStorage.clear();
-                window.location = '/';
-                // this.$http
-                //     .get("auth/logout")
-                //     .then(() => {
-                //         window.localStorage.clear();
-                //         window.location = '/';
-                //     })
-                //     .catch((error) => {
-                //         console.error(error);
-                //     });
+                this.$http
+                    .get("logout")
+                    .then(() => {
+                        this.$store.dispatch('user/resetState');
+                        window.location = '/';
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
             }
         }
+
     };
 </script>

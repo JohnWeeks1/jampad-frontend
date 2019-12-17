@@ -76,7 +76,9 @@
                     password_confirmation: this.confirmPassword,
                 })
                     .then(() => {
-                        this.login();
+                        setTimeout(() => {
+                            this.login();
+                        }, 500)
                     })
                     .catch((error) => {
                         console.error(error);
@@ -90,8 +92,14 @@
                     })
                     .then(response => {
                         this.$store.commit('user/loginSuccess', response.data.access_token);
-                        this.$store.dispatch('user/fetchUser');
-                        this.$router.push('/account/profile');
+                        setTimeout(() => {
+                            this.$store.dispatch('user/fetchUser');
+
+                            setTimeout(() => {
+                                this.$router.push({ name: 'Profile'});
+                            }, 1000);
+
+                        }, 1000);
                     })
                     .catch((error) => {
                         console.error(error);
@@ -99,6 +107,7 @@
 
             },
         },
+
         components: {
             TopNavigation,
             FooterComponent
