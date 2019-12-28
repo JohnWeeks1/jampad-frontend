@@ -5,41 +5,53 @@
             <div class="w-full max-w-xs">
                 <div class="bg-white border p-8 shadow rounded w-full mb-6">
                     <h1 class="mb-6 text-lg text-gray-900 font-thin">Let's get rocking!</h1>
-                    <fieldset class="mb-4">
-                        <label class="block text-sm text-gray-900 mb-2">First name</label>
-                        <input id="first_name" type="text" v-model="firstName"
-                               class="block w-full rounded-sm border bg-white py-2 px-3 text-sm"
-                                       name="first_name"
-                               required autofocus>
-                    </fieldset>
-                    <fieldset class="mb-4">
-                        <label class="block text-sm text-gray-900 mb-2">Last name</label>
-                        <input id="last_name" type="text" v-model="lastName"
-                               class="block w-full rounded-sm border bg-white py-2 px-3 text-sm"
-                               name="last_name"
-                               required>
-                    </fieldset>
-                    <fieldset class="mb-4">
-                        <label class="block text-sm text-gray-900 mb-2">Email address</label>
-                        <input id="email" type="email" v-model="email"
-                               class="block w-full rounded-sm border bg-white py-2 px-3 text-sm"
-                               name="email"
-                               required>
-                    </fieldset>
-                    <fieldset class="mb-4">
-                        <label class="block text-sm text-gray-900 mb-2">Password</label>
-                        <input id="password" type="password" v-model="password"
-                               class="block w-full rounded-sm border bg-white py-2 px-3 text-sm"
-                               name="password"
-                               required>
-                    </fieldset>
-                    <fieldset class="mb-4">
-                        <label class="block text-sm text-gray-900 mb-2">Confirm password</label>
-                        <input id="confirm_password" type="password" v-model="confirmPassword"
-                               class="block w-full rounded-sm border bg-white py-2 px-3 text-sm"
-                               name="confirm_password"
-                               required>
-                    </fieldset>
+                        <fieldset class="mb-4">
+                            <label class="block text-sm text-gray-900 mb-2">First name</label>
+                            <input id="first_name" type="text" v-model="firstName"
+                                   class="block w-full rounded-sm border bg-white py-2 px-3 text-sm"
+                                           name="first_name"
+                                   required autofocus>
+                            <span v-if="errors.first_name" class="text-sm text-red-500">
+                                {{ errors.first_name[0] }}
+                            </span>
+                        </fieldset>
+                        <fieldset class="mb-4">
+                            <label class="block text-sm text-gray-900 mb-2">Last name</label>
+                            <input id="last_name" type="text" v-model="lastName"
+                                   class="block w-full rounded-sm border bg-white py-2 px-3 text-sm"
+                                   name="last_name"
+                                   required>
+                            <span v-if="errors.last_name" class="text-sm text-red-500">
+                                {{ errors.last_name[0] }}
+                            </span>
+                        </fieldset>
+                        <fieldset class="mb-4">
+                            <label class="block text-sm text-gray-900 mb-2">Email address</label>
+                            <input id="email" type="email" v-model="email"
+                                   class="block w-full rounded-sm border bg-white py-2 px-3 text-sm"
+                                   name="email"
+                                   required>
+                            <span v-if="errors.email" class="text-sm text-red-500">
+                                {{ errors.email[0] }}
+                            </span>
+                        </fieldset>
+                        <fieldset class="mb-4">
+                            <label class="block text-sm text-gray-900 mb-2">Password</label>
+                            <input id="password" type="password" v-model="password"
+                                   class="block w-full rounded-sm border bg-white py-2 px-3 text-sm"
+                                   name="password"
+                                   required>
+                            <span v-if="errors.password" class="text-sm text-red-500">
+                                {{ errors.password[0] }}
+                            </span>
+                        </fieldset>
+                        <fieldset class="mb-4">
+                            <label class="block text-sm text-gray-900 mb-2">Confirm password</label>
+                            <input id="confirm_password" type="password" v-model="confirmPassword"
+                                   class="block w-full rounded-sm border bg-white py-2 px-3 text-sm"
+                                   name="confirm_password"
+                                   required>
+                        </fieldset>
                     <button type="submit" @click="register"
                             class="block w-full bg-black text-white rounded-sm py-3 text-sm tracking-wide">
                         Confirm
@@ -59,6 +71,7 @@
         name: 'Register',
         data() {
             return {
+                errors: [],
                 firstName: null,
                 lastName: null,
                 email: null,
@@ -81,6 +94,7 @@
                         }, 500)
                     })
                     .catch((error) => {
+                        this.errors = error.response.data.errors;
                         console.error(error);
                     });
             },

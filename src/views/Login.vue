@@ -7,6 +7,9 @@
                     <h1 class="mb-6 text-lg text-gray-900 font-thin">
                         Login to your account
                     </h1>
+                    <fieldset class="text-red-500" v-for="(error) in errors">
+                        {{ error[0] }}
+                    </fieldset>
                     <fieldset class="mb-4">
                         <label class="block text-sm text-gray-900 mb-2">Email address</label>
                         <input
@@ -81,6 +84,7 @@
         name: "Login",
         data() {
             return {
+                errors: [],
                 email: null,
                 password: null
             }
@@ -106,7 +110,7 @@
                         },1000);
                     })
                     .catch((error) => {
-                        console.error(error);
+                        this.errors = error.response.data.errors;
                     });
             },
         },
