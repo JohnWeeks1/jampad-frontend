@@ -77,49 +77,40 @@
                 email: null,
                 password: null,
                 confirmPassword: null,
+                is_admin : null,
             }
         },
         methods: {
             register() {
-                this.$http.post("auth/register", {
+                this.$store.dispatch('user/register', {
                     first_name: this.firstName,
                     last_name: this.lastName,
                     email: this.email,
                     password: this.password,
                     password_confirmation: this.confirmPassword,
                 })
-                    .then(() => {
+                .then(() => {
                         setTimeout(() => {
                             this.login();
-                        }, 500)
+                        }, 500);
                     })
-                    .catch((error) => {
+                    .catch(error => {
                         this.errors = error.response.data.errors;
-                        console.error(error);
-                    });
+                        console.log(error)
+                    })
             },
             login() {
-                this.$http
-                    .post("auth/login", {
-                        email: this.email,
-                        password: this.password
+                this.$store.dispatch('user/login', {
+                    email: this.email,
+                    password: this.password
+                })
+                    .then(() => {
+                        window.location = 'account/profile';
                     })
-                    .then(response => {
-                        this.$store.commit('user/loginSuccess', response.data.access_token);
-                        setTimeout(() => {
-                            this.$store.dispatch('user/fetchUser');
-
-                            setTimeout(() => {
-                                this.$router.push({ name: 'Profile'});
-                            }, 1000);
-
-                        }, 1000);
+                    .catch(error => {
+                        console.log(error)
                     })
-                    .catch((error) => {
-                        console.error(error);
-                    });
-
-            },
+            }
         },
 
         components: {

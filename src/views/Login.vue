@@ -7,9 +7,6 @@
                     <h1 class="mb-6 text-lg text-gray-900 font-thin">
                         Login to your account
                     </h1>
-                    <fieldset class="text-red-500" v-for="(error) in errors">
-                        {{ error[0] }}
-                    </fieldset>
                     <fieldset class="mb-4">
                         <label class="block text-sm text-gray-900 mb-2">Email address</label>
                         <input
@@ -21,6 +18,9 @@
                             required
                             autofocus
                         />
+                        <span v-if="errors.email" class="text-sm text-red-500">
+                            {{ errors.email[0] }}
+                        </span>
                     </fieldset>
                     <fieldset class="mb-4">
                         <div class="w-full flex justify-between items-center">
@@ -42,6 +42,9 @@
                             name="password"
                             required
                         />
+                        <span v-if="errors.password" class="text-sm text-red-500">
+                                {{ errors.password[0] }}
+                            </span>
                     </fieldset>
                     <div class="pt-1 pb-5 text-sm text-gray-darker font-thin">
                         <label
@@ -89,30 +92,19 @@
                 password: null
             }
         },
-
-
         methods: {
             login() {
-                this.$http
-                    .post("auth/login", {
-                        email: this.email,
-                        password: this.password
+                this.$store.dispatch('user/login', {
+                    email: this.email,
+                    password: this.password
+                })
+                    .then(() => {
+                        this.$router.push({ name: 'Profile'})
                     })
-                    .then(response => {
-                        this.$store.commit('user/loginSuccess', response.data.access_token);
-                        setTimeout(() => {
-                            this.$store.dispatch('user/fetchUser');
-
-                            setTimeout(() => {
-                                this.$router.push({ name: 'Profile'});
-                            }, 1000);
-
-                        },1000);
+                    .catch(error => {
+                        console.log(error)
                     })
-                    .catch((error) => {
-                        this.errors = error.response.data.errors;
-                    });
-            },
+            }
         },
         components: {
             TopNavigation,

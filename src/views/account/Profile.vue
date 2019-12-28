@@ -56,10 +56,10 @@
                 return this.$store.getters['user/getDescription'];
             },
             getImage() {
-                this.$http.get("image")
+                this.$http.get("auth/image")
                     .then(response => {
                         if (response.data.image !== null) {
-                            this.image = process.env.VUE_APP_API_URL + 'image';
+                            this.image = process.env.VUE_APP_API_URL + 'auth/image';
                         }
                     })
                     .catch(error => {

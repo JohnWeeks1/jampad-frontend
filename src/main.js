@@ -9,16 +9,15 @@ Vue.use(VueAxios, axios);
 
 const baseURL = process.env.VUE_APP_API_URL;
 
+const token = localStorage.getItem('token');
+
+if (token) {
+    Vue.prototype.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+}
+
 if (typeof baseURL !== 'undefined') {
     Vue.axios.defaults.baseURL = baseURL;
 }
-
-
-if (store.getters['user/getToken'] !== null) {
-    Vue.axios.defaults.headers.common['Authorization'] = 'Bearer ' + store.getters['user/getToken'];
-}
-
-Vue.config.productionTip = false;
 
 new Vue({
   router,

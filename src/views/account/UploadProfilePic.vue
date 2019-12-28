@@ -85,7 +85,7 @@
                 data.append('left', this.coordinates.left);
                 data.append('top', this.coordinates.top);
 
-                this.$http.post("user/" + this.$store.state.user.userId, data, {
+                this.$http.post("auth/user/" + this.$store.state.user.userId, data, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }

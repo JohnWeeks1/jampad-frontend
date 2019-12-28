@@ -1,32 +1,23 @@
-import Vue from "vue";
 import axios from "axios";
-import VueAxios from "vue-axios";
-
-Vue.use(VueAxios, axios);
 
 const getDefaultState = () => {
     return {
-        token: null,
-        isLoggedIn: false,
         firstName: null,
         lastName: null,
         description: null,
         image: null,
         userId: null,
         email: null,
-    };
+        isLoggedIn: null,
+    }
 };
-
 
 export default {
     namespaced: true,
     state: getDefaultState(),
     mutations: {
-        resetState (state) {
+        resetState(state) {
             Object.assign(state, getDefaultState());
-        },
-        loginSuccess(state, payload) {
-            state.token = payload
         },
         updateFirstName(state, payload) {
             state.firstName = payload
@@ -51,29 +42,78 @@ export default {
         },
     },
     actions: {
-        fetchUser({commit}) {
-            Vue.axios.get("user")
-                .then(response => {
-                    commit('updateFirstName', response.data.data.first_name);
-                    commit('updateLastName', response.data.data.last_name);
-                    commit('updateDescription', response.data.data.description);
-                    commit('updateEmail', response.data.data.email);
-                    commit('updateImage', response.data.data.image);
-                    commit('updateUserId', response.data.data.id);
-                    commit('updateIsLoggedIn', true);
+        login({commit, dispatch}, data){
+            return new Promise((resolve, reject) => {
+                axios.post('auth/login', {
+                    email: data.email,
+                    password: data.password,
                 })
-                .catch(error => {
-                    // shit fuck man
-                    console.log(error);
-                });
+                    .then(response => {
+
+                            localStorage.setItem('token', response.data.access_token);
+                            axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.access_token;
+                        console
+                        dispatch('fetchUser');
+                        resolve(response);
+                    })
+                    .catch(error => {
+                        localStorage.removeItem('token');
+                        reject(error);
+                    })
+            })
         },
-        resetState ({ commit }) {
-            commit('resetState');
+        register({commit, dispatch}, data){
+            return new Promise((resolve, reject) => {
+                axios.post('auth/register', {
+                    first_name: data.first_name,
+                    last_name: data.last_name,
+                    email: data.email,
+                    password: data.password,
+                    password_confirmation: data.password_confirmation
+                })
+                    .then(response => {
+
+                        localStorage.setItem('token', response.data.access_token);
+                        axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.access_token;
+
+                        resolve(response);
+                    })
+                    .catch(error => {
+                        localStorage.removeItem('token');
+                        reject(error);
+                    })
+            })
+        },
+        fetchUser({commit}){
+            return new Promise((resolve, reject) => {
+                axios.post('auth/user')
+                    .then(response => {
+                        commit('updateFirstName', response.data.first_name);
+                        commit('updateLastName', response.data.last_name);
+                        commit('updateDescription', response.data.description);
+                        commit('updateEmail', response.data.email);
+                        commit('updateImage', response.data.image);
+                        commit('updateUserId', response.data.id);
+                        commit('updateIsLoggedIn', true);
+
+                        resolve(response);
+                    })
+                    .catch(error => {
+                        localStorage.removeItem('token');
+                        reject(error);
+                    })
+            })
+        },
+        logout({commit}){
+            return new Promise((resolve) => {
+                commit('resetState');
+                localStorage.removeItem('token');
+                delete axios.defaults.headers.common['Authorization'];
+                resolve();
+            })
         }
     },
     getters: {
-        getToken: state => state.token,
-
         getFirstName: state => state.firstName,
 
         getLastName: state => state.lastName,
@@ -87,5 +127,7 @@ export default {
         getUserId: state => state.id,
 
         getIsLoggedIn: state => state.isLoggedIn,
+
+        getToken: state => state.token,
     }
 }

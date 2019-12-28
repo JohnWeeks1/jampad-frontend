@@ -69,16 +69,11 @@
             },
         },
         methods: {
-            logout() {
-                this.$http
-                    .get("logout")
+            logout: function () {
+                this.$store.dispatch('user/logout')
                     .then(() => {
-                        this.$store.dispatch('user/resetState');
-                        window.location = '/';
+                        this.$router.push({ name: 'Home'})
                     })
-                    .catch((error) => {
-                        console.error(error);
-                    });
             }
         }
 
