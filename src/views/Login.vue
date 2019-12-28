@@ -102,6 +102,7 @@
                         this.$router.push({ name: 'Profile'})
                     })
                     .catch(error => {
+                        this.errors = error.response.data.errors;
                         console.log(error)
                     })
             }
