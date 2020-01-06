@@ -52,7 +52,7 @@ export default {
 
                             localStorage.setItem('token', response.data.access_token);
                             axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.access_token;
-                        console
+
                         dispatch('fetchUser');
                         resolve(response);
                     })

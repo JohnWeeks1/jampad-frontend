@@ -34,11 +34,13 @@
                     </div>
                     <div class="flex flex-wrap font-bold text-gray-100">
                         <div class="w-1/3 p-2">
-                            <div class="rounded-full text-center font-white bg-gray-400 p-2
-                                border-gray-100 border-2 py-4 bg-green-500 hover:bg-green-600">
-                                <span class="inline-block w-full">1</span>
-                                <span class="inline-block w-full">Connected</span>
-                            </div>
+                            <router-link :to="{ name: 'Connections' }">
+                                <div class="rounded-full text-center font-white bg-gray-400 p-2
+                                    border-gray-100 border-2 py-4 bg-green-500 hover:bg-green-600">
+                                    <span class="inline-block w-full">1</span>
+                                    <span class="inline-block w-full">Connected</span>
+                                </div>
+                            </router-link>
                         </div>
                         <div class="w-1/3 p-2">
                             <div class="rounded-full text-center bg-gray-400 p-2

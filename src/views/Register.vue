@@ -105,7 +105,7 @@
                     password: this.password
                 })
                     .then(() => {
-                        window.location = 'account/profile';
+                        this.$router.push({ name: 'Account'});
                     })
                     .catch(error => {
                         console.log(error)

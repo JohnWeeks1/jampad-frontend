@@ -99,7 +99,7 @@
                     password: this.password
                 })
                     .then(() => {
-                        this.$router.push({ name: 'Profile'})
+                        this.$router.push({ name: 'Account'})
                     })
                     .catch(error => {
                         this.errors = error.response.data.errors;

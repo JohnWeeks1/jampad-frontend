@@ -30,11 +30,32 @@ const routes = [
             import(/* webpackChunkName: "login" */ "./views/Register.vue")
     },
     {
+        path: '/account',
+        name: 'Account',
+        beforeEnter: AuthMiddleware,
+        component: () =>
+            import(/* webpackChunkName: "account" */ './views/Account'),
+    },
+    {
         path: '/account/profile',
         name: 'Profile',
         beforeEnter: AuthMiddleware,
         component: () =>
             import(/* webpackChunkName: "profile" */ './views/account/Profile')
+    },
+    {
+        path: '/account/connections',
+        name: 'Connections',
+        beforeEnter: AuthMiddleware,
+        component: () =>
+            import(/* webpackChunkName: "profile" */ './views/account/Connections')
+    },
+    {
+        path: '/account/search-music',
+        name: 'SearchMusic',
+        beforeEnter: AuthMiddleware,
+        component: () =>
+            import(/* webpackChunkName: "profile" */ './views/account/SearchMusic')
     },
     {
         path: '/account/edit-profile',
