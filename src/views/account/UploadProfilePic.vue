@@ -91,7 +91,6 @@
                         }
                     })
                     .then(() => {
-                        this.$store.dispatch('user/fetchUser');
                         this.$router.push({ name: 'Profile'});
                     })
                     .catch(error => {

@@ -1,18 +1,18 @@
 <template>
-    <div class="heroImage w-full h-full py-24 px-6 bg-cover bg-no-repeat bg-center relative z-10">
+    <div class="heroImage py-48 px-6 bg-cover bg-no-repeat bg-center">
         <div class="container max-w-4xl mx-auto text-center">
-            <h1
-                class="text-xl leading-tight md:text-3xl text-center text-gray-100 mb-3"
-            >
+            <h1 class="text-xl leading-tight md:text-3xl text-center text-gray-100 mb-3">
                 JamPad for the modern musician
             </h1>
-            <p class="text-md md:text-lg text-center text-white ">
+            <p class="text-md md:text-lg text-center text-white">
                 Login or register now and join other like minded people
             </p>
-            <router-link class="mt-6 inline-block bg-white text-black no-underline px-4 py-3 shadow-lg"
-                 :to="{ name: 'Register' }">
-                Register
-            </router-link>
+            <div class="mt-6">
+                <router-link class="text-center bg-green-500 text-white border border-green-500 font-bold py-3 px-5 rounded w-full"
+                             :to="{ name: 'Register' }">
+                    Register
+                </router-link>
+            </div>
         </div>
     </div>
 </template>

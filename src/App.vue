@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" class="bg-black">
         <transition
             name="fade"
             mode="out-in">
@@ -7,7 +7,6 @@
         </transition>
     </div>
 </template>
-
 <style scoped>
     .fade-enter-active,
     .fade-leave-active {

@@ -88,6 +88,7 @@ export default {
             return new Promise((resolve, reject) => {
                 axios.post('auth/user')
                     .then(response => {
+                        console.log(response.data);
                         commit('updateFirstName', response.data.first_name);
                         commit('updateLastName', response.data.last_name);
                         commit('updateDescription', response.data.description);

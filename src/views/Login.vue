@@ -1,14 +1,14 @@
 <template>
     <div>
         <top-navigation></top-navigation>
-        <div class="min-h-screen w-full p-6 bg-gray-300 flex justify-center items-center">
+        <div class="min-h-screen w-full p-6 bg-black flex justify-center items-center">
             <div class="w-full max-w-xs">
-                <div class="bg-white border p-8 shadow rounded w-full mb-6">
-                    <h1 class="mb-6 text-lg text-gray-900 font-thin">
+                <div class="bg-gray-900 p-8 shadow rounded w-full mb-6">
+                    <h1 class="mb-6 text-lg text-gray-100 font-thin">
                         Login to your account
                     </h1>
                     <fieldset class="mb-4">
-                        <label class="block text-sm text-gray-900 mb-2">Email address</label>
+                        <label class="block text-sm text-gray-100 mb-2">Email address</label>
                         <input
                             id="email"
                             type="email"
@@ -24,11 +24,11 @@
                     </fieldset>
                     <fieldset class="mb-4">
                         <div class="w-full flex justify-between items-center">
-                            <label for="password" class="block text-sm text-gray-900 mb-2"
+                            <label for="password" class="block text-sm text-gray-100 mb-2"
                             >Password</label
                             >
                             <a
-                                class="text-xs font-thin text-blue no-underline hover:underline"
+                                class="text-xs font-thin text-gray-300 no-underline hover:underline"
                                 href="#"
                             >
                                 Forgotten password?
@@ -46,7 +46,7 @@
                                 {{ errors.password[0] }}
                             </span>
                     </fieldset>
-                    <div class="pt-1 pb-5 text-sm text-gray-darker font-thin">
+                    <div class="pt-1 pb-5 text-sm text-gray-300 font-thin">
                         <label
                         ><input
                             class="mr-1"
@@ -60,12 +60,12 @@
                     <button
                         type="submit"
                         @click="login"
-                        class="block w-full bg-black text-white rounded-sm py-3 text-sm tracking-wide"
+                        class="block w-full bg-green-500 text-gray-100 font-bold rounded-sm py-3 text-sm tracking-wide"
                     >
                         Sign in
                     </button>
                 </div>
-                <p class="text-center text-sm text-gray-600 font-thin">
+                <p class="text-center text-sm text-gray-300 font-thin">
                     Don't have an account yet?
                     <router-link
                         class="text-blue-500 no-underline hover:underline"

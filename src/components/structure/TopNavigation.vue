@@ -1,11 +1,11 @@
 <template>
-    <nav class="w-full px-6 bg-white shadow-lg relative z-20">
+    <nav class="w-full px-6 bg-black shadow-lg relative z-20">
 <!--        {{this.$store.state.user.isLoggedIn}}-->
         <div class="container mx-auto max-w-4xl h-16 flex justify-between text-xs md:text-sm">
             <div class="h-full flex items-center">
                 <router-link  class="mr-4"
                      :to="{ name: 'Home' }">
-                    <img class="h-24" src="@/assets/images/site/JamPad.png" alt=""/>
+                    <img class="h-24" src="@/assets/images/site/jampad-white.png" alt=""/>
                 </router-link>
                 <router-link :to="{ name: 'Home' }" class="text-gray-600 hover:text-black no-underline mr-4">Home</router-link>
             </div>

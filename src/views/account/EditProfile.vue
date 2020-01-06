@@ -4,7 +4,7 @@
         <div class="container mx-auto w-full max-w-lg pt-20 pb-20">
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    <label class="block uppercase tracking-wide text-gray-100 text-xs font-bold mb-2"
                            for="grid-first-name">
                         First Name
                     </label>
@@ -17,7 +17,7 @@
                         <span v-if="errors['first_name']" class="text-red-500">{{errors['first_name'][0]}}</span>
                 </div>
                 <div class="w-full md:w-1/2 px-3">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    <label class="block uppercase tracking-wide text-gray-100 text-xs font-bold mb-2"
                            for="grid-last-name">
                         Last Name
                     </label>
@@ -32,11 +32,12 @@
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    <label class="block uppercase tracking-wide text-gray-100 text-xs font-bold mb-2">
                         Profile Picture
                     </label>
                     <router-link
-                        class="mt-6 inline-block bg-blue-500 hover:bg-blue-700 text-white no-underline px-4 py-3 shadow-lg"
+                        class="mt-6 inline-block bg-green-500 hover:bg-green-700 font-bold text-white no-underline px-4
+                            py-3 shadow-lg"
                         :to="{ name: 'UploadProfilePic' }">
                         Update Profile Picture
                     </router-link>
@@ -44,7 +45,7 @@
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full px-3">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    <label class="block uppercase tracking-wide text-gray-100 text-xs font-bold mb-2"
                            for="description">
                         Description
                     </label>
@@ -57,7 +58,7 @@
             </div>
             <div class="flex flex-wrap mt-8 -mx-3 mb-6">
                 <div class="w-full px-3">
-                    <button class="float-right bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    <button class="float-right bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
                             @click="updateProfile">
                         Update
                     </button>
