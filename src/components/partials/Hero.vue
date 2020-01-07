@@ -26,5 +26,7 @@
 <style scoped>
     .heroImage {
         background-image: url("../../assets/images/site/HeroImg.jpg");
+        /*background: rgb(12,175,1);*/
+        /*background: linear-gradient(47deg, rgba(12,175,1,1) 33%, rgba(0,0,0,1) 37%, rgba(0,0,0,1) 63%, rgba(9,194,0,1) 67%);*/
     }
 </style>
