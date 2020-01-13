@@ -112,6 +112,13 @@ export default {
                 delete axios.defaults.headers.common['Authorization'];
                 resolve();
             })
+        },
+        image({commit}){
+            return new Promise((resolve) => {
+                commit('resetState');
+
+                resolve();
+            })
         }
     },
     getters: {

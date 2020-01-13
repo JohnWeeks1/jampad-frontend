@@ -78,7 +78,7 @@
             },
             updateProfilePic() {
                 let data = new FormData();
-                let file = this.$refs.fileInput.files[0]
+                let file = this.$refs.fileInput.files[0];
                 data.append('image', file);
                 data.append('height', this.coordinates.height);
                 data.append('width', this.coordinates.width);

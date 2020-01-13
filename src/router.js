@@ -65,6 +65,13 @@ const routes = [
             import(/* webpackChunkName: "edit-profile" */ './views/account/EditProfile')
     },
     {
+        path: '/account/add-song',
+        name: 'AddSong',
+        beforeEnter: AuthMiddleware,
+        component: () =>
+            import(/* webpackChunkName: "add-song" */ './views/account/AddSong')
+    },
+    {
         path: '/account/upload-profile-pic',
         name: 'UploadProfilePic',
         beforeEnter: AuthMiddleware,

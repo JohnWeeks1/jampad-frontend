@@ -5,7 +5,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-
 Vue.use(VueAxios, axios);
 
 const baseURL = process.env.VUE_APP_API_URL;
