@@ -72,6 +72,13 @@ const routes = [
             import(/* webpackChunkName: "add-song" */ './views/account/AddSong')
     },
     {
+        path: '/account/add-youtube-video-link',
+        name: 'AddSong',
+        beforeEnter: AuthMiddleware,
+        component: () =>
+            import(/* webpackChunkName: "add-youtube-video-link" */ './views/account/AddYoutubeVideoLink')
+    },
+    {
         path: '/account/upload-profile-pic',
         name: 'UploadProfilePic',
         beforeEnter: AuthMiddleware,

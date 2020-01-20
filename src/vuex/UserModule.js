@@ -113,13 +113,6 @@ export default {
                 resolve();
             })
         },
-        image({commit}){
-            return new Promise((resolve) => {
-                commit('resetState');
-
-                resolve();
-            })
-        }
     },
     getters: {
         getFirstName: state => state.firstName,

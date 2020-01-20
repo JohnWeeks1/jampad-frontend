@@ -11,6 +11,7 @@
     "core-js": "^3.4.3",
     "vue": "^2.6.10",
     "vue-advanced-cropper": "^0.15.1",
+    "vue-aplayer": "^1.6.1",
     "vue-axios": "^2.1.5",
     "vue-carousel-3d": "^0.2.0",
     "vue-particles": "^1.0.9",

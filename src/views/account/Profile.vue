@@ -48,7 +48,7 @@
                         <div class="w-1/3 p-2">
                             <div class="rounded-full text-center bg-gray-400 p-2
                                 border-gray-100 border-2 py-4 bg-green-500 hover:bg-green-600">
-                                <span class="inline-block w-full">{{songs.length}}</span>
+                                <span class="inline-block w-full">9</span>
                                 <span class="inline-block w-full">Songs</span>
                             </div>
                         </div>
@@ -65,54 +65,8 @@
             </div>
         </div>
 
-
-
-
-
-
-        <div class="max-w-4xl mx-auto pb-20">
-            <div class="flex flex-wrap font-bold text-gray-100">
-                <div class="w-1/4 mt-4">
-                    <router-link
-                            class="bg-transparent hover:bg-green-500 text-gray-100 font-semibold hover:text-white
-                                    py-2 px-4 border border-green-500 hover:border-transparent rounded"
-                            :to="{ name: 'AddSong' }">
-                        Add Song
-                    </router-link>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-        <div class="max-w-4xl mx-auto pb-20">
-            <div class="flex">
-                <div v-for="song in songs" :key="songs.id">
-                    <song-player :data="song"></song-player>
-<!--                    <div class="text-gray-100 text-center py-2 m-2">-->
-<!--                        <div class="max-w-sm overflow-hidden bg-gray-900">-->
-<!--                            <img class="w-full" src="@/assets/images/site/metal-cover.png">-->
-<!--                            <div class="px-4 py-2">-->
-<!--                                <div class="text-lg">-->
-<!--                                    <router-link class="" :to="{ name: 'SongPlayer' }">-->
-<!--                                        {{ song.name }}-->
-<!--                                    </router-link>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-                </div>
-            </div>
-        </div>
-
-
+        <songs-section></songs-section>
+        <youtube-videos-section></youtube-videos-section>
 
         <footer-component></footer-component>
     </div>
@@ -120,8 +74,9 @@
 
 <script>
     import FooterComponent from "@/components/structure/Footer";
+    import SongsSection from "@/components/partials/SongsSection";
     import TopNavigation from "@/components/structure/TopNavigation";
-    import SongPlayer from "@/components/partials/SongPlayer";
+    import YoutubeVideosSection from "@/components/partials/YoutubeVideosSection";
 
     export default {
         name: "Profile",
@@ -130,14 +85,12 @@
                 fullName: null,
                 description: null,
                 image: null,
-                songs: null,
             }
         },
         mounted() {
             this.fullName = this.getFullName();
             this.description = this.getDescription();
-            this.getImage();
-            this.getSongs();
+            this.image = process.env.VUE_APP_API_URL + `auth/user/${this.$store.state.user.userId}/image`;
         },
         methods: {
             getFullName() {
@@ -146,32 +99,13 @@
             getDescription() {
                 return this.$store.getters['user/getDescription'];
             },
-            getImage() {
-                this.$http.get("auth/image")
-                    .then(response => {
-                        if (response.data.image !== null) {
-                            this.image = process.env.VUE_APP_API_URL + 'auth/image';
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            },
-            getSongs() {
-                this.$http.get('auth/songs/' + this.$store.state.user.userId)
-                    .then(response => {
-                        this.songs = response.data;
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            }
         },
 
         components: {
-            TopNavigation,
+            YoutubeVideosSection,
             FooterComponent,
-            SongPlayer
+            TopNavigation,
+            SongsSection,
         },
     };
 </script>

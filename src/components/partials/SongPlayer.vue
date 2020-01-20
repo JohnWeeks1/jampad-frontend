@@ -1,34 +1,60 @@
 <template>
     <div>
-        <audio v-if="song" controls>
-            <source :src="song" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
+        <aplayer
+            :music="{
+                title: list[0].title,
+                artist: list[0].artist,
+                src: list[0].path,
+                pic: list[0].pic
+             }"
+             :list="list"
+        />
     </div>
 </template>
 
 <script>
+    import Aplayer from 'vue-aplayer';
+
     export default {
         name: "SongPlayer",
         data() {
             return {
-                song: process.env.VUE_APP_API_URL + 'auth/song/' + this.data.id
+                list: [],
+                songs: null,
+                path: process.env.VUE_APP_API_URL + 'auth/song/4'
             }
         },
-        props: ['data'],
-        // `mounted() {
-        //     this.getSong();
-        // },
-        // methods: {
-        //     getSong() {
-        //         this.$http.get('auth/song/' + this.data.id)
-        //             .then(() => {
-        //                 this.song = process.env.VUE_APP_API_URL + 'auth/song/' + this.data.id;
-        //             })
-        //             .catch(error => {
-        //                 console.error(error);
-        //             });
-        //     },
-        // },`
+        mounted() {
+            this.songs = this.getSongsByUserId();
+        },
+        methods: {
+            getSongsByUserId() {
+                this.$http.get("auth/songs/" + this.$store.state.user.userId)
+                    .then(response => {
+                        this.songs = response.data;
+                        this.mapSongs(this.songs)
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            },
+            mapSongs(songs) {
+                let newSongs = songs.map(function(e) {
+                    return {
+                        title: e.name,
+                        artist: 'Silent Siren',
+                        src: process.env.VUE_APP_API_URL + 'auth/song/' +e.id,
+                        pic: 'http://placekitten.com/200/200'
+                    }
+                });
+
+                for (let i = 0; i < newSongs.length; i++) {
+                    this.list.push(newSongs[i])
+                }
+            },
+        },
+        components: {
+            Aplayer
+        }
     };
 </script>
