@@ -2,7 +2,9 @@
     <div>
         <top-navigation></top-navigation>
         <div class="container mx-auto w-full max-w-lg pt-20 pb-20">
-            <div class="flex flex-wrap mb-6">
+            <h2 class="text-gray-100 text-xl">Update Image</h2>
+            <div class="bg-green-500 w-full h-1"></div>
+            <div class="flex flex-wrap mb-6 mt-4">
                 <div class="w-full px-3">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Profile Picture

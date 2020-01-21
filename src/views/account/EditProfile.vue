@@ -2,7 +2,9 @@
     <div>
         <top-navigation></top-navigation>
         <div class="container mx-auto w-full max-w-lg pt-20 pb-20">
-            <div class="flex flex-wrap -mx-3 mb-6">
+            <h2 class="text-gray-100 text-xl">Edit Profile</h2>
+            <div class="bg-green-500 w-full h-1"></div>
+            <div class="flex flex-wrap -mx-3 mt-4 mb-6">
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-gray-100 text-xs font-bold mb-2"
                            for="grid-first-name">
