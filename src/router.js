@@ -72,8 +72,15 @@ const routes = [
             import(/* webpackChunkName: "add-song" */ './views/account/AddSong')
     },
     {
+        path: '/account/delete-song',
+        name: 'DeleteSong',
+        beforeEnter: AuthMiddleware,
+        component: () =>
+            import(/* webpackChunkName: "delete-song" */ './views/account/DeleteSong')
+    },
+    {
         path: '/account/add-youtube-video-link',
-        name: 'AddSong',
+        name: 'AddYoutubeVideoLink',
         beforeEnter: AuthMiddleware,
         component: () =>
             import(/* webpackChunkName: "add-youtube-video-link" */ './views/account/AddYoutubeVideoLink')

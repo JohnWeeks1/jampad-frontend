@@ -1,14 +1,21 @@
 <template>
     <div>
-        <aplayer
-            :music="{
-                title: list[0].title,
-                artist: list[0].artist,
-                src: list[0].path,
-                pic: list[0].pic
-             }"
-             :list="list"
-        />
+        <div v-if="!songs">
+            <div class="text-white text-center">
+                You have no songs! Why not add some.
+            </div>
+        </div>
+        <div v-else>
+            <aplayer
+                :music="{
+                    title: list[0].title,
+                    artist: list[0].artist,
+                    src: list[0].path,
+                    pic: list[0].pic
+                }"
+                :list="list"
+            />
+        </div>
     </div>
 </template>
 

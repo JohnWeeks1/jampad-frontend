@@ -1,11 +1,11 @@
 <template>
     <div>
         <top-navigation></top-navigation>
+
         <div class="w-full py-24 px-6 relative z-10">
             <div class="container max-w-4xl mx-auto flex">
                 <div class=" md:w-1/3">
-                    <img v-if="image"
-                        :src="image"
+                    <img v-if="image" :src="image"
                         class="w-full rounded-lg h-auto shadow-lg"/>
                     <router-link v-else :to="{ name: 'UploadProfilePic' }">
                         <img class="z-0" src="@/assets/images/site/DefaultUserAvatar.png">
