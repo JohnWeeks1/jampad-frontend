@@ -48,7 +48,7 @@
             mapSongs(songs) {
                 let newSongs = songs.map(function(e) {
                     return {
-                        title: e.name,
+                        title: e.title,
                         artist: 'Silent Siren',
                         src: process.env.VUE_APP_API_URL + 'auth/song/' +e.id,
                         pic: 'http://placekitten.com/200/200'

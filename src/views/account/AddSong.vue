@@ -13,7 +13,10 @@
                     <input
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded
                         py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        type="text" v-model="title" id="title" name="title" ref="file">
+                        type="text" v-model="title" id="title" name="title">
+                    <span v-if="errors.title" class="text-sm text-red-500">
+                        {{ errors.title[0] }}
+                    </span>
                 </div>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
@@ -22,6 +25,10 @@
                         Song
                     </label>
                     <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+                    <br>
+                    <span v-if="errors.song" class="text-sm text-red-500">
+                        {{ errors.song[0] }}
+                    </span>
                 </div>
             </div>
             <div class="flex flex-wrap mt-8 -mx-3 mb-6">
@@ -45,7 +52,8 @@
         name: "AddSong",
         data() {
             return {
-                title: null,
+                errors: [],
+                title: '',
                 song: null,
             }
         },
@@ -66,7 +74,8 @@
                         this.$router.push({ name: 'Profile'});
                     })
                     .catch(error => {
-                        console.error(error);
+                        this.errors = error.response.data.errors;
+                        console.log(error);
                     })
             }
         },

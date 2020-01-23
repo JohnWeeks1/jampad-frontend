@@ -25,7 +25,7 @@
                     <input placeholder="https://www.youtube.com/watch?v=2VnYXKwneUQ"
                             class="appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded
                         py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            type="text" v-model="video" id="video" name="video" ref="file">
+                            type="text" v-model="url" id="video" name="video" ref="file">
                 </div>
             </div>
             <div class="flex flex-wrap mt-8 -mx-3 mb-6">
@@ -46,17 +46,18 @@
     import TopNavigation from "@/components/structure/TopNavigation";
 
     export default {
-        name: "AddSong",
+        name: "AddYoutubeVideoLink",
         data() {
             return {
-                title: null,
-                video: null,
+                title: '',
+                url: '',
             }
         },
         methods: {
             addYoutubeVideoLink() {
                 this.$http.post("auth/add-youtube-link/" + this.$store.state.user.userId,{
-                    youtube_video: this.video
+                    title: this.title,
+                    url: this.url
                 })
                     .then(response => {
                         console.log(response);

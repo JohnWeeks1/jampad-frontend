@@ -7,7 +7,7 @@
             <div class="bg-gray-900 text-white shadow-md rounded px-8 pt-6 pb-8">
                 <div v-for="(song, index) in songs" class="flex flex-wrap">
                     <div class="w-3/4 mr-auto mt-2 text-lg p-1">
-                        {{ ++index }}. {{song.name}}
+                        {{ ++index }}. {{song.title}}
                     </div>
                     <div class="w-1/4 ml-auto p-1">
                         <button @click="deleteSong(song)" class="float-right bg-transparent hover:bg-red-500 text-gray-100 font-semibold hover:text-white
