@@ -86,6 +86,13 @@ const routes = [
             import(/* webpackChunkName: "add-youtube-video-link" */ './views/account/AddYoutubeVideoLink')
     },
     {
+        path: '/account/delete-youtube-video-link',
+        name: 'DeleteYoutubeVideoLink',
+        beforeEnter: AuthMiddleware,
+        component: () =>
+            import(/* webpackChunkName: "delete-youtube-video-link" */ './views/account/DeleteYoutubeVideoLink')
+    },
+    {
         path: '/account/upload-profile-pic',
         name: 'UploadProfilePic',
         beforeEnter: AuthMiddleware,

@@ -1,13 +1,13 @@
 <template>
     <div>
         <top-navigation></top-navigation>
-
         <div class="w-full py-24 px-6 relative z-10">
             <div class="container max-w-4xl mx-auto flex">
-                <div class=" md:w-1/3">
-                    <img v-if="image" :src="image"
-                        class="w-full rounded-lg h-auto shadow-lg"/>
-                    <router-link v-else :to="{ name: 'UploadProfilePic' }">
+                <div v-if="image" class=" md:w-1/3">
+                    <img :src="image" class="w-full rounded-lg h-auto shadow-lg"/>
+                </div>
+                <div v-else class=" md:w-1/3">
+                    <router-link :to="{ name: 'UploadProfilePic' }">
                         <img class="z-0" src="@/assets/images/site/DefaultUserAvatar.png">
                     </router-link>
                 </div>
@@ -18,6 +18,7 @@
                                 {{ fullName }}
                             </h1>
                             <span class="text-md text-gray-700"> <i>London, Uk</i> </span>
+                            <follow-user></follow-user>
                         </div>
                         <div class="w-1/4 mt-4">
                             <router-link
@@ -32,7 +33,7 @@
                         <div class="w-1/3 p-2">
                             <router-link :to="{ name: 'Connections' }">
                                 <div class="rounded-full text-center font-white bg-gray-400 p-2
-                                    border-gray-100 border-2 py-4 bg-green-500 hover:bg-green-600">
+                                    border-gray-100 border-2 py-1 bg-green-500 hover:bg-green-600">
                                     <span class="inline-block w-full">0</span>
                                     <span class="inline-block w-full">Connected</span>
                                 </div>
@@ -40,14 +41,14 @@
                         </div>
                         <div class="w-1/3 p-2">
                             <div class="rounded-full text-center bg-gray-400 p-2
-                                border-gray-100 border-2 py-4 bg-green-500 hover:bg-green-600">
+                                border-gray-100 border-2 py-1 bg-green-500 hover:bg-green-600">
                                 <span class="inline-block w-full">0</span>
                                 <span class="inline-block w-full">Rated</span>
                             </div>
                         </div>
                         <div class="w-1/3 p-2">
                             <div class="rounded-full text-center bg-gray-400 p-2
-                                border-gray-100 border-2 py-4 bg-green-500 hover:bg-green-600">
+                                border-gray-100 border-2 py-1 bg-green-500 hover:bg-green-600">
                                 <span class="inline-block w-full">9</span>
                                 <span class="inline-block w-full">Songs</span>
                             </div>
@@ -75,6 +76,7 @@
 <script>
     import FooterComponent from "@/components/structure/Footer";
     import SongsSection from "@/components/partials/SongsSection";
+    import FollowUser from "@/components/partials/FollowUser";
     import TopNavigation from "@/components/structure/TopNavigation";
     import YoutubeVideosSection from "@/components/partials/YoutubeVideosSection";
 
@@ -90,7 +92,7 @@
         mounted() {
             this.fullName = this.getFullName();
             this.description = this.getDescription();
-            this.image = process.env.VUE_APP_API_URL + `auth/user/${this.$store.state.user.userId}/image`;
+            this.image = process.env.VUE_APP_API_URL + `auth/image/${this.$store.state.user.userId}`;
         },
         methods: {
             getFullName() {
@@ -106,6 +108,7 @@
             FooterComponent,
             TopNavigation,
             SongsSection,
+            FollowUser,
         },
     };
 </script>

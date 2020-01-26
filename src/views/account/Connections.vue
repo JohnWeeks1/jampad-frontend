@@ -4,12 +4,11 @@
             <div class="container max-w-4xl mx-auto pb-20">
                 <div class="w-full">
                     <div class="flex flex-wrap font-bold text-gray-100">
-                        <div class="w-1/5 p-2">
-
+                        <div v-for="user in users" class="w-1/5 p-2">
                             <div class="max-w-sm overflow-hidden bg-gray-900">
-                                <img class="w-full" src="@/assets/images/site/metal-cover.png" >
+                                <img class="w-full" src="http://www.jampad.localhost/api/auth/image/1">
                                 <div class="px-4 py-2">
-                                    <div class="text-md text-center">Name</div>
+                                    <div class="text-md text-center">{{user[0].first_name + ' ' + user[0].last_name}}</div>
                                 </div>
                             </div>
                         </div>
@@ -28,49 +27,23 @@
         name: "Connections",
         data() {
             return {
-                fullName: null,
-                description: null,
-                image: null,
-                song: null
+                users: null,
             }
         },
         mounted() {
-            this.fullName = this.getFullName();
-            this.description = this.getDescription();
-            this.getImage();
-            this.getSong();
+            this.getConnections()
         },
         methods: {
-            getFullName() {
-                return this.$store.getters['user/getFirstName'] + ' ' + this.$store.getters['user/getLastName'];
-            },
-            getDescription() {
-                return this.$store.getters['user/getDescription'];
-            },
-            getImage() {
-                this.$http.get("auth/image")
+            getConnections() {
+                this.$http.get("auth/following/" + this.$store.state.user.userId)
                     .then(response => {
-                        if (response.data.image !== null) {
-                            this.image = process.env.VUE_APP_API_URL + 'auth/image';
-                        }
+                        this.users = response.data;
                     })
                     .catch(error => {
                         console.error(error);
                     });
             },
-            getSong() {
-                this.$http.get('auth/song/1')
-                    .then(response => {
-                        if (response.data !== null) {
-                            this.song = process.env.VUE_APP_API_URL + 'auth/song/1';
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            }
         },
-
         components: {
             TopNavigation,
             FooterComponent

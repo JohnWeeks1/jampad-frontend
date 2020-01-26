@@ -6,6 +6,13 @@
                 <div class="bg-green-500 w-full h-1"></div>
                 <div class="w-full mt-4">
                     <router-link
+                            v-if="videos.length > 0"
+                            class="float-right bg-transparent hover:bg-red-500 text-gray-100 font-semibold hover:text-white
+                                py-2 px-4 border border-red-500 hover:border-transparent rounded"
+                            :to="{ name: 'DeleteYoutubeVideoLink' }">
+                        Delete Video
+                    </router-link>
+                    <router-link
                         class="float-right bg-transparent hover:bg-green-500 text-gray-100 font-semibold hover:text-white
                                 py-2 px-4 border border-green-500 hover:border-transparent rounded"
                         :to="{ name: 'AddYoutubeVideoLink' }">
@@ -14,19 +21,12 @@
                 </div>
             </div>
         </div>
-
         <div class="max-w-4xl mx-auto pb-20">
                 <!-- Two columns -->
                 <div class="flex mb-4">
-                    <div class="w-1/2 bg-gray-400">
-                        <iframe class="w-full h-48"
-                                src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=0">
-                        </iframe>
-                    </div>
-                    <div class="w-1/2 bg-gray-400">
-                        <iframe class="w-full h-48"
-                                src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=0">
-                        </iframe>
+                    <div v-for="video in videos" class="w-1/2 p-2">
+                        <h3 class="text-lg text-white">{{ video.title }}</h3>
+                        <iframe class="w-full h-48" :src="video.url"></iframe>
                     </div>
                 </div>
         </div>
@@ -35,6 +35,25 @@
 
 <script>
     export default {
-        name: 'YoutubeVideosSection'
+        name: 'YoutubeVideosSection',
+        data() {
+            return {
+                videos: null
+            }
+        },
+        mounted() {
+            this.getVideoByUser();
+        },
+        methods: {
+            getVideoByUser() {
+                this.$http.get('auth/youtube/' + this.$store.state.user.userId)
+                    .then(response => {
+                        this.videos = response.data;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+        }
     };
 </script>
