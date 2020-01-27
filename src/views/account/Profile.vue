@@ -29,55 +29,24 @@
                             </router-link>
                         </div>
                     </div>
-                    <div class="flex flex-wrap font-bold text-gray-100">
-                        <div class="w-1/3 p-2">
-                            <router-link :to="{ name: 'Connections' }">
-                                <div class="rounded-full text-center font-white bg-gray-400 p-2
-                                    border-gray-100 border-2 py-1 bg-green-500 hover:bg-green-600">
-                                    <span class="inline-block w-full">0</span>
-                                    <span class="inline-block w-full">Connected</span>
-                                </div>
-                            </router-link>
-                        </div>
-                        <div class="w-1/3 p-2">
-                            <div class="rounded-full text-center bg-gray-400 p-2
-                                border-gray-100 border-2 py-1 bg-green-500 hover:bg-green-600">
-                                <span class="inline-block w-full">0</span>
-                                <span class="inline-block w-full">Rated</span>
-                            </div>
-                        </div>
-                        <div class="w-1/3 p-2">
-                            <div class="rounded-full text-center bg-gray-400 p-2
-                                border-gray-100 border-2 py-1 bg-green-500 hover:bg-green-600">
-                                <span class="inline-block w-full">9</span>
-                                <span class="inline-block w-full">Songs</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-gray-900 rounded-lg p-5">
-                        <p class="text-gray-100">
-                            About the artist
-                        </p>
-                        <p class="text-md md:text-lg text-gray-600 leading-normal">
-                            {{ description }}
-                        </p>
-                    </div>
+                    <profile-info-section></profile-info-section>
+                    <profile-about-section></profile-about-section>
                 </div>
             </div>
         </div>
-
         <songs-section></songs-section>
         <youtube-videos-section></youtube-videos-section>
-
         <footer-component></footer-component>
     </div>
 </template>
 
 <script>
+    import FollowUser from "@/components/partials/FollowUser";
     import FooterComponent from "@/components/structure/Footer";
     import SongsSection from "@/components/partials/SongsSection";
-    import FollowUser from "@/components/partials/FollowUser";
     import TopNavigation from "@/components/structure/TopNavigation";
+    import ProfileInfoSection from "@/components/partials/ProfileInfoSection";
+    import ProfileAboutSection from "@/components/partials/ProfileAboutSection";
     import YoutubeVideosSection from "@/components/partials/YoutubeVideosSection";
 
     export default {
@@ -85,26 +54,23 @@
         data() {
             return {
                 fullName: null,
-                description: null,
                 image: null,
             }
         },
         mounted() {
             this.fullName = this.getFullName();
-            this.description = this.getDescription();
             this.image = process.env.VUE_APP_API_URL + `auth/image/${this.$store.state.user.userId}`;
         },
         methods: {
             getFullName() {
                 return this.$store.getters['user/getFirstName'] + ' ' + this.$store.getters['user/getLastName'];
             },
-            getDescription() {
-                return this.$store.getters['user/getDescription'];
-            },
         },
 
         components: {
             YoutubeVideosSection,
+            ProfileAboutSection,
+            ProfileInfoSection,
             FooterComponent,
             TopNavigation,
             SongsSection,

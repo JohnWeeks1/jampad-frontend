@@ -15,9 +15,6 @@ export default {
         resetState(state) {
             Object.assign(state, getDefaultState());
         },
-        updateUserId(state, payload) {
-            state.userId = payload
-        },
         updateTitle(state, payload) {
             state.title = payload
         },
@@ -26,24 +23,23 @@ export default {
         },
     },
     actions: {
-        login({commit, dispatch}, data){
+        fetchSongsByUserId({commit}, data){
             return new Promise((resolve, reject) => {
-                axios.post('auth/song', {
-                    email: data.email,
-                })
+                this.$http.get("auth/songs/" + this.$store.state.user.userId)
                     .then(response => {
+                        console.log(response.data);
+                        commit('updateTitle', response.data.title);
+                        commit('updateTitle', response.data.url);
                         resolve(response);
                     })
                     .catch(error => {
-                        localStorage.removeItem('token');
+                        console.error(error);
                         reject(error);
-                    })
+                    });
             })
         },
     },
     getters: {
-        getUserId: state => state.userId,
-
         getTitle: state => state.title,
 
         getUrl: state => state.url,
