@@ -31,7 +31,7 @@
 </template>
 
 <script>
-    import SongPlayer from "@/components/partials/SongPlayer";
+    import SongPlayer from "@/components/partials/profile/SongPlayer";
 
     export default {
         name: 'SongsSection',

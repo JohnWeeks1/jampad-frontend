@@ -1,11 +1,10 @@
 <template>
     <div>
-        <top-navigation></top-navigation>
         <div class="container mx-auto w-full max-w-4xl pt-20 pb-20">
             <h2 class="text-gray-100 text-xl">Delete songs</h2>
             <div class="bg-red-500 w-full h-1 mb-4"></div>
             <div class="bg-gray-900 text-white shadow-md rounded px-8 pt-6 pb-8">
-                <div v-for="(song, index) in songs" class="flex flex-wrap">
+                <div class="flex flex-wrap" v-for="(song, index) in songs">
                     <div class="w-3/4 mr-auto mt-2 text-lg p-1">
                         {{ ++index }}. {{song.title}}
                     </div>
@@ -18,13 +17,10 @@
                 </div>
             </div>
         </div>
-        <footer-component></footer-component>
     </div>
 </template>
 
 <script>
-    import FooterComponent from "@/components/structure/Footer";
-    import TopNavigation from "@/components/structure/TopNavigation";
 
     export default {
         name: "DeleteSong",
@@ -64,7 +60,7 @@
                         );
                         this.$http.delete("auth/song/" + song.id)
                             .then(() => {
-                                this.$router.push({ name: 'Profile'});
+                                this.$router.push({name: 'Profile'});
                             })
                             .catch(error => {
                                 console.error(error);
@@ -72,11 +68,6 @@
                     }
                 })
             }
-        },
-
-        components: {
-            TopNavigation,
-            FooterComponent,
         },
     };
 </script>

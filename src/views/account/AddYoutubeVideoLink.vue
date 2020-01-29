@@ -1,6 +1,5 @@
 <template>
     <div>
-        <top-navigation></top-navigation>
         <div class="container mx-auto w-full max-w-lg pt-20 pb-20">
             <h2 class="text-gray-100 text-xl">Add YouTube video</h2>
             <div class="bg-green-500 w-full h-1 mb-4"></div>
@@ -44,7 +43,6 @@
                 </div>
             </div>
         </div>
-        <footer-component></footer-component>
     </div>
 </template>
 
@@ -83,11 +81,6 @@
 
                 return null;
             }
-        },
-
-        components: {
-            TopNavigation,
-            FooterComponent
         },
     };
 </script>

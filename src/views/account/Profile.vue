@@ -1,14 +1,14 @@
 <template>
     <div>
-        <top-navigation></top-navigation>
+        <router-view name="nav"></router-view>
         <div class="w-full py-24 px-6 relative z-10">
             <div class="container max-w-4xl mx-auto flex">
                 <div v-if="image" class=" md:w-1/3">
-                    <img :src="image" class="w-full rounded-lg h-auto shadow-lg"/>
+                    <img alt="Profile pic" :src="image" class="w-full rounded-lg h-auto shadow-lg"/>
                 </div>
                 <div v-else class=" md:w-1/3">
                     <router-link :to="{ name: 'UploadProfilePic' }">
-                        <img class="z-0" src="@/assets/images/site/DefaultUserAvatar.png">
+                        <img alt="Default pic" class="z-0" src="@/assets/images/site/DefaultUserAvatar.png">
                     </router-link>
                 </div>
                 <div class="w-full pl-4 md:w-2/3">
@@ -36,18 +36,15 @@
         </div>
         <songs-section></songs-section>
         <youtube-videos-section></youtube-videos-section>
-        <footer-component></footer-component>
     </div>
 </template>
 
 <script>
-    import FollowUser from "@/components/partials/FollowUser";
-    import FooterComponent from "@/components/structure/Footer";
-    import SongsSection from "@/components/partials/SongsSection";
-    import TopNavigation from "@/components/structure/TopNavigation";
-    import ProfileInfoSection from "@/components/partials/ProfileInfoSection";
-    import ProfileAboutSection from "@/components/partials/ProfileAboutSection";
-    import YoutubeVideosSection from "@/components/partials/YoutubeVideosSection";
+    import FollowUser from "@/components/partials/profile/FollowUser";
+    import SongsSection from "@/components/partials/profile/SongsSection";
+    import ProfileInfoSection from "@/components/partials/profile/ProfileInfoSection";
+    import ProfileAboutSection from "@/components/partials/profile/ProfileAboutSection";
+    import YoutubeVideosSection from "@/components/partials/profile/YoutubeVideosSection";
 
     export default {
         name: "Profile",
@@ -71,8 +68,6 @@
             YoutubeVideosSection,
             ProfileAboutSection,
             ProfileInfoSection,
-            FooterComponent,
-            TopNavigation,
             SongsSection,
             FollowUser,
         },

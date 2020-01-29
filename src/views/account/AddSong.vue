@@ -1,6 +1,6 @@
 <template>
     <div>
-        <top-navigation></top-navigation>
+        <top-navigation/>
         <div class="container mx-auto w-full max-w-lg pt-20 pb-20">
             <h2 class="text-gray-100 text-xl">Add new song</h2>
             <div class="bg-green-500 w-full h-1 mb-4"></div>
@@ -40,13 +40,10 @@
                 </div>
             </div>
         </div>
-        <footer-component></footer-component>
     </div>
 </template>
 
 <script>
-    import FooterComponent from "@/components/structure/Footer";
-    import TopNavigation from "@/components/structure/TopNavigation";
 
     export default {
         name: "AddSong",
@@ -57,6 +54,7 @@
                 song: null,
             }
         },
+        props: ['topNavigation'],
         methods: {
             handleFileUpload(){
                 this.song = this.$refs.file.files[0];
@@ -78,11 +76,6 @@
                         console.log(error);
                     })
             }
-        },
-
-        components: {
-            TopNavigation,
-            FooterComponent
         },
     };
 </script>
