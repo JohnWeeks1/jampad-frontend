@@ -1,9 +1,11 @@
 <template>
     <div>
-        <transition
-                name="fade"
-                mode="out-in">
-            <router-view/>
+        <transition name="fade" mode="out-in">
+            <div>
+                <top-navigation/>
+                <router-view/>
+                <footer-component/>
+            </div>
         </transition>
     </div>
 </template>
@@ -23,8 +25,15 @@
 </style>
 
 <script>
+    import TopNavigation from "@/components/structure/TopNavigation";
+    import FooterComponent from "@/components/structure/Footer";
+
     export default {
         name: "Account",
+        components: {
+            TopNavigation,
+            FooterComponent
+        }
     };
 </script>
 

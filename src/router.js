@@ -17,8 +17,6 @@ import DeleteYoutubeVideoLink from "./views/account/DeleteYoutubeVideoLink.vue";
 import UploadProfilePic from "./views/account/UploadProfilePic.vue";
 import AllPosts from "./views/account/AllPosts.vue";
 import AuthMiddleware from '@/middleware/AuthMiddleware'
-import TopNavigation from '@/components/structure/TopNavigation'
-import FooterComponent from '@/components/structure/Footer'
 
 Vue.use(VueRouter);
 
@@ -46,11 +44,7 @@ const routes = [
     {
         path: '/account',
         beforeEnter: AuthMiddleware,
-        components: {
-            default: Account,
-            nav: TopNavigation,
-            footerComponent: FooterComponent,
-        },
+        component: Account,
         children: [
             {
                 path: '',
