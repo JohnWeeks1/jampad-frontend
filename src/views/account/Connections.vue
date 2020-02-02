@@ -1,5 +1,6 @@
 <template>
     <div>
+        <top-navigation></top-navigation>
         <div class="container max-w-4xl mx-auto pb-20">
             <div class="w-full">
                 <div class="flex flex-wrap font-bold text-gray-100">
@@ -14,10 +15,13 @@
                 </div>
             </div>
         </div>
+        <footer-component></footer-component>
     </div>
 </template>
 
 <script>
+    import FooterComponent from "@/components/structure/Footer";
+    import TopNavigation from "@/components/structure/TopNavigation";
 
     export default {
         name: "Connections",
@@ -40,5 +44,9 @@
                     });
             },
         },
+        components: {
+            TopNavigation,
+            FooterComponent
+        }
     };
 </script>

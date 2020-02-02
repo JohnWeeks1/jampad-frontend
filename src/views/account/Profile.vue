@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-view name="nav"></router-view>
+        <top-navigation/>
         <div class="w-full py-24 px-6 relative z-10">
             <div class="container max-w-4xl mx-auto flex">
                 <div v-if="image" class=" md:w-1/3">
@@ -36,10 +36,13 @@
         </div>
         <songs-section></songs-section>
         <youtube-videos-section></youtube-videos-section>
+        <footer-component/>
     </div>
 </template>
 
 <script>
+    import FooterComponent from "@/components/structure/Footer";
+    import TopNavigation from "@/components/structure/TopNavigation";
     import FollowUser from "@/components/partials/profile/FollowUser";
     import SongsSection from "@/components/partials/profile/SongsSection";
     import ProfileInfoSection from "@/components/partials/profile/ProfileInfoSection";
@@ -68,6 +71,8 @@
             YoutubeVideosSection,
             ProfileAboutSection,
             ProfileInfoSection,
+            FooterComponent,
+            TopNavigation,
             SongsSection,
             FollowUser,
         },

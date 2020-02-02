@@ -40,10 +40,13 @@
                 </div>
             </div>
         </div>
+        <footer-component/>
     </div>
 </template>
 
 <script>
+    import FooterComponent from "@/components/structure/Footer";
+    import TopNavigation from "@/components/structure/TopNavigation";
 
     export default {
         name: "AddSong",
@@ -77,5 +80,9 @@
                     })
             }
         },
+        components: {
+            FooterComponent,
+            TopNavigation
+        }
     };
 </script>

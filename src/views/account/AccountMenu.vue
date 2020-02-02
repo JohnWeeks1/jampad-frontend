@@ -1,5 +1,6 @@
 <template>
     <div>
+        <top-navigation></top-navigation>
         <div class="max-w-4xl mx-auto pb-20 pt-20">
             <div class="w-full">
                 <div class="flex flex-wrap font-bold">
@@ -26,12 +27,19 @@
                 </div>
             </div>
         </div>
+        <footer-component></footer-component>
     </div>
 </template>
 
 <script>
+    import FooterComponent from "@/components/structure/Footer";
+    import TopNavigation from "@/components/structure/TopNavigation";
 
     export default {
         name: "AccountMenu",
+        components: {
+            FooterComponent,
+            TopNavigation
+        }
     };
 </script>
