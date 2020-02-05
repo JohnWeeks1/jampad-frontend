@@ -58,7 +58,7 @@
             return {
                 slides: [],
                 song: [],
-                path: process.env.VUE_APP_API_URL + 'auth/song/4'
+                path: process.env.VUE_APP_API_URL + 'auth/songs/4'
             }
         },
         beforeMount() {
@@ -78,7 +78,7 @@
                 let newSongs = songs.map(function(e) {
                     return {
                         title: e.title,
-                        src: process.env.VUE_APP_API_URL + 'auth/song/' +e.id,
+                        src: process.env.VUE_APP_API_URL + 'auth/songs/' +e.id,
                     }
                 });
 

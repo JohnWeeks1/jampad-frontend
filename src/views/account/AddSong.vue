@@ -66,7 +66,7 @@
                 let form = new FormData();
                 form.append('song', this.song);
                 form.append('title', this.title);
-                this.$http.post("auth/add-song/" + this.$store.state.user.userId, form,{
+                this.$http.post("auth/songs/" + this.$store.state.user.userId, form,{
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }

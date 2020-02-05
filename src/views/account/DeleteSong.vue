@@ -38,7 +38,7 @@
         },
         methods: {
             getSongsByUserId() {
-                this.$http.get("auth/songs/" + this.$store.state.user.userId)
+                this.$http.get("auth/user/" + this.$store.state.user.userId + '/songs')
                     .then(response => {
                         this.songs = response.data;
                     })
@@ -62,7 +62,7 @@
                             'Your file has been deleted.',
                             'success'
                         );
-                        this.$http.delete("auth/song/" + song.id)
+                        this.$http.delete("auth/songs/" + song.id)
                             .then(() => {
                                 this.$router.push({name: 'Profile'});
                             })

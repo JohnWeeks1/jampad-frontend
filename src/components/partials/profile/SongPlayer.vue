@@ -28,7 +28,7 @@
             return {
                 list: [],
                 songs: null,
-                path: process.env.VUE_APP_API_URL + 'auth/song/4'
+                path: process.env.VUE_APP_API_URL + 'auth/songs/4'
             }
         },
         mounted() {
@@ -36,7 +36,7 @@
         },
         methods: {
             getSongsByUserId() {
-                this.$http.get("auth/songs/" + this.$store.state.user.userId)
+                this.$http.get("auth/user/" + this.$store.state.user.userId + '/songs')
                     .then(response => {
                         this.songs = response.data;
                         this.mapSongs(this.songs)
@@ -50,7 +50,7 @@
                     return {
                         title: e.title,
                         artist: 'Silent Siren',
-                        src: process.env.VUE_APP_API_URL + 'auth/song/' +e.id,
+                        src: process.env.VUE_APP_API_URL + 'auth/songs/' +e.id,
                         pic: 'http://placekitten.com/200/200'
                     }
                 });
